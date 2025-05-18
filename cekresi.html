@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cek Resi - InfoCek.id</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
+    h1 { color: #333; }
+    form { margin-top: 20px; }
+    input[type="text"] {
+      padding: 10px; width: 250px; font-size: 16px;
+      border: 1px solid #ccc; border-radius: 4px;
+    }
+    button {
+      padding: 10px 15px; font-size: 16px;
+      background-color: #007bff; color: white; border: none;
+      border-radius: 4px; cursor: pointer;
+    }
+    button:hover { background-color: #0056b3; }
+    #result { margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+  <h1>Cek Resi</h1>
+  
+  <form id="cekResiForm">
+    <input type="text" id="resiNumber" placeholder="Masukkan nomor resi..." required />
+    <button type="submit">Cek</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    document.getElementById('cekResiForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const resi = document.getElementById('resiNumber').value.trim();
+      if (!resi) {
+        alert('Nomor resi tidak boleh kosong!');
+        return;
+      }
+      // Tampilkan nomor resi sementara
+      document.getElementById('result').innerHTML = `<p>Nomor resi yang Anda masukkan: <strong>${resi}</strong></p>`;
+    });
+  </script>
+
+</body>
+</html>
