@@ -4,30 +4,63 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>InfoCek.id – Portal Cek Praktis Sehari-hari</title>
+  <meta name="description" content="InfoCek.id adalah portal praktis buat cek resi, cuaca, jadwal bola, harga emas, dan legalitas rekening dengan cepat dan simpel.">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fffbe6;
       color: #333;
       line-height: 1.6;
       padding: 20px;
     }
+
     header {
-      background-color: #007bff;
-      color: #fff;
+      background-color: #ffc107;
+      color: #222;
       padding: 20px 0;
       text-align: center;
       border-radius: 10px;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
+
     h1 {
-      font-size: 28px;
-      margin-bottom: 10px;
+      font-size: 30px;
+      margin-bottom: 5px;
     }
+
     p {
       font-size: 16px;
     }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: #fff9d6;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #d17b00;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
     .container {
       max-width: 800px;
       margin: auto;
@@ -36,22 +69,57 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
+
     ul {
       margin-top: 20px;
       padding-left: 20px;
     }
+
+    li {
+      margin-bottom: 10px;
+    }
+
     a {
       text-decoration: none;
-      color: #007bff;
+      color: #d17b00;
     }
+
     a:hover {
       text-decoration: underline;
     }
+
+    .badge {
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    .aktif {
+      background-color: #28a745;
+      color: #fff;
+    }
+
+    .segera {
+      background-color: #ffc107;
+      color: #000;
+    }
+
     footer {
       margin-top: 40px;
       text-align: center;
       font-size: 14px;
       color: #777;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 24px;
+      }
+      .container {
+        padding: 15px;
+      }
     }
   </style>
 </head>
@@ -59,26 +127,35 @@
 
   <header>
     <h1>InfoCek.id</h1>
-    <p>Portal Cek Praktis Sehari-hari</p>
+    <p>Portal Cek Praktis Sehari-hari. Gampang, cepat, dan berguna!</p>
   </header>
 
+  <nav>
+    <a href="/">Beranda</a>
+    <a href="/cekresi.html">Cek Resi</a>
+    <a href="#">Jadwal Bola</a>
+    <a href="#">Cuaca</a>
+    <a href="#">Harga</a>
+    <a href="#">Rekening</a>
+  </nav>
+
   <div class="container">
-    <p>Selamat datang di <strong>InfoCek.id</strong> – situs sederhana untuk membantu kebutuhan harianmu secara praktis.</p>
+    <p>Halo! Selamat datang di <strong>InfoCek.id</strong> – tempat simpel buat bantuin kamu cek-cek hal penting sehari-hari. Gak ribet, gak makan waktu.</p>
     
-    <h3>Layanan yang tersedia:</h3>
+    <h3 style="margin-top: 20px;">Layanan yang bisa kamu pakai:</h3>
     <ul>
-      <li><a href="/cekresi.html">📦 Cek Resi Pengiriman</a></li>
-      <li><a href="#">⚽ Jadwal Bola Hari Ini (segera)</a></li>
-      <li><a href="#">🌤️ Cek Cuaca Lokasi Anda (segera)</a></li>
-      <li><a href="#">💰 Harga Emas, Dollar, dan Bitcoin (segera)</a></li>
-      <li><a href="#">🔎 Cek Legalitas Nomor Rekening (segera)</a></li>
+      <li><a href="/cekresi.html">📦 Cek Resi Pengiriman</a><span class="badge aktif">aktif</span></li>
+      <li><a href="#">⚽ Jadwal Bola Hari Ini</a><span class="badge segera">segera</span></li>
+      <li><a href="#">🌤️ Cek Cuaca Lokasi Anda</a><span class="badge segera">segera</span></li>
+      <li><a href="#">💰 Harga Emas, Dollar, dan Bitcoin</a><span class="badge segera">segera</span></li>
+      <li><a href="#">🔎 Cek Legalitas Nomor Rekening</a><span class="badge segera">segera</span></li>
     </ul>
 
-    <p style="margin-top: 20px;">Kami akan terus mengembangkan fitur lainnya agar lebih bermanfaat. Silakan bookmark halaman ini untuk kemudahan akses ke depan.</p>
+    <p style="margin-top: 20px;">Fitur lain juga bakal nyusul. Jadi, jangan lupa bookmark ya biar gampang balik ke sini kapan aja kamu butuh.</p>
   </div>
 
   <footer>
-    &copy; 2025 InfoCek.id – All rights reserved.
+    &copy; 2025 InfoCek.id – Semua hak dilindungi.
   </footer>
 
 </body>
