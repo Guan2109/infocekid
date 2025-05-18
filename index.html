@@ -1,133 +1,172 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>InfoCek.id – Portal Cek Praktis Sehari-hari</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <style>
-    /* Reset & Base */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #f9fafd;
-      color: #333;
-      line-height: 1.6;
-    }
-    a {
-      color: #1e90ff;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>InfoCek.id – Portal Cek Praktis Sehari-hari</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #f5f7fa;
+    color: #333;
+  }
+  a {
+    color: #1e90ff;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
 
-    /* Header */
-    header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      background: #fff;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 1rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      z-index: 1000;
-    }
-    .logo {
-      font-weight: 600;
-      font-size: 1.4rem;
-      color: #28a745; /* green fresh */
-    }
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+  }
+  .logo {
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: #2ecc71;
+    cursor: pointer;
+  }
 
-    /* Main content */
-    main {
-      max-width: 1000px;
-      margin: 100px auto 40px; /* top margin to avoid header overlap */
-      padding: 0 1rem;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 2rem;
-      color: #28a745;
-    }
+  /* Banner Hero */
+  .hero {
+    margin-top: 70px; /* untuk header */
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    color: white;
+    padding: 80px 20px;
+    text-align: center;
+    border-radius: 0 0 40px 40px;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+  }
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .hero p {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    font-weight: 500;
+    text-shadow: 0 1px 5px rgba(0,0,0,0.2);
+  }
+  .btn-primary {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 16px 40px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 15px rgba(39,174,96,0.4);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+  .btn-primary:hover {
+    background: #1e8449;
+    box-shadow: 0 12px 20px rgba(30,132,73,0.6);
+  }
 
-    /* Card container */
-    .card-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-      padding: 20px;
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.12);
-    }
-    .card-icon {
-      font-size: 48px;
-      color: #28a745;
-      margin-bottom: 15px;
-    }
-    .card-title {
-      font-weight: 600;
-      margin-bottom: 10px;
-      font-size: 1.2rem;
-    }
-    .card-desc {
-      font-size: 0.95rem;
-      color: #666;
-      margin-bottom: 15px;
-    }
-    .card-button {
-      background: #28a745;
-      color: #fff;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    .card-button:hover {
-      background: #218838;
-    }
+  main {
+    max-width: 1100px;
+    margin: 50px auto 80px;
+    padding: 0 20px;
+  }
 
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 1.5rem 1rem;
-      background: #f1f3f5;
-      color: #777;
-      font-size: 0.9rem;
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+  }
+  .card {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 14px 40px rgba(39,174,96,0.25);
+  }
+  .card-icon {
+    font-size: 64px;
+    color: #27ae60;
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: #2c3e50;
+  }
+  .card-desc {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 18px;
+    min-height: 60px;
+  }
+  .card-button {
+    background: #2ecc71;
+    border: none;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 40px;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+  }
+  .card-button:hover {
+    background: #27ae60;
+  }
+
+  footer {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    background: #ecf0f1;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+  }
+
+  /* Responsive text scaling */
+  @media (max-width: 600px) {
+    .hero h1 {
+      font-size: 2.2rem;
     }
-
-    /* Responsive Hamburger Menu (optional for future) */
-    /* Could add later if butuh menu navigasi */
-
-  </style>
+    .hero p {
+      font-size: 1.1rem;
+    }
+  }
+</style>
 </head>
 <body>
 
 <header>
-  <div class="logo">InfoCek.id</div>
+  <div class="logo" onclick="location.href='index.html'">InfoCek.id</div>
 </header>
 
-<main>
+<section class="hero">
   <h1>Portal Cek Praktis Sehari-hari</h1>
-  
-  <div class="card-container">
+  <p>Semua info penting, cek resi, jadwal bola, cuaca, harga emas, dan legalitas nomor, dalam satu tempat.</p>
+  <button class="btn-primary" onclick="location.href='#features'">Cek Fitur Sekarang</button>
+</section>
+
+<main>
+  <section id="features" class="card-container">
 
     <div class="card" onclick="location.href='cekresi.html'">
       <div class="card-icon">📦</div>
@@ -164,7 +203,7 @@
       <button class="card-button">Cek Sekarang</button>
     </div>
 
-  </div>
+  </section>
 </main>
 
 <footer>
