@@ -1,103 +1,67 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cek Resi - InfoCek.id</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
-    h1 { color: #333; }
-    form { margin-top: 20px; }
-    input, select {
-      padding: 10px; margin-right: 10px;
-      font-size: 16px; border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    button {
-      padding: 10px 15px; font-size: 16px;
-      background-color: #007bff; color: white; border: none;
-      border-radius: 4px; cursor: pointer;
-    }
-    button:hover { background-color: #0056b3; }
-    #result { margin-top: 20px; padding: 10px; background: #fff; border-radius: 4px; }
-    .label { font-weight: bold; margin-top: 10px; display: block; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cek Resi RajaOngkir</title>
 </head>
 <body>
-
-  <h1>Cek Resi</h1>
-  
-  <form id="cekResiForm">
-    <input type="text" id="resiNumber" placeholder="Masukkan nomor resi..." required />
-    <select id="kurir" required>
+  <h2>Cek Resi Pengiriman</h2>
+  <form id="cekForm">
+    <label for="courier">Pilih Kurir:</label>
+    <select id="courier" name="courier" required>
+      <option value="">-- Pilih Kurir --</option>
       <option value="jne">JNE</option>
+      <option value="pos">POS Indonesia</option>
       <option value="tiki">TIKI</option>
-      <option value="pos">POS</option>
+      <option value="wahana">Wahana</option>
+      <option value="sicepat">SiCepat</option>
+      <option value="jnt">J&T</option>
+      <option value="indah">Indah Logistic</option>
+      <option value="sap">SAP Express</option>
+      <option value="jet">JET Express</option>
+      <option value="dse">DSE Logistics</option>
     </select>
-    <button type="submit">Cek</button>
+    <br /><br />
+    <label for="waybill">Nomor Resi:</label>
+    <input type="text" id="waybill" name="waybill" required />
+    <br /><br />
+    <button type="submit">Cek Resi</button>
   </form>
 
-  <div id="result"></div>
+  <pre id="result"></pre>
 
   <script>
-    const form = document.getElementById('cekResiForm');
-    const resultDiv = document.getElementById('result');
+    const form = document.getElementById('cekForm');
+    const result = document.getElementById('result');
 
-    form.addEventListener('submit', async function(e) {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const resi = document.getElementById('resiNumber').value.trim();
-      const kurir = document.getElementById('kurir').value;
+      result.textContent = 'Loading...';
 
-      if (!resi || !kurir) {
-        alert('Nomor resi dan kurir harus diisi.');
-        return;
-      }
-
-      resultDiv.innerHTML = 'Memproses...';
+      const courier = form.courier.value.trim();
+      const waybill = form.waybill.value.trim();
 
       try {
-        const response = await fetch('https://rajaongkir.komerce.id/api/v1/waybills', {
+        const response = await fetch('/cekresi', {
           method: 'POST',
-          headers: {
-            'key': 'PCRVugDy921e93219a74c87ae0Lhg5lB',
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: new URLSearchParams({
-            waybill: resi,
-            courier: kurir
-          })
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ courier, waybill }),
         });
+
+        if (!response.ok) throw new Error('Error cek resi');
 
         const data = await response.json();
 
-        if (data.status.code !== 200) {
-          resultDiv.innerHTML = `<p style="color:red;">Gagal: ${data.status.description}</p>`;
-          return;
+        if (data.rajaongkir && data.rajaongkir.result) {
+          result.textContent = JSON.stringify(data.rajaongkir.result, null, 2);
+        } else {
+          result.textContent = 'Data tidak ditemukan atau nomor resi salah.';
         }
-
-        const detail = data.data.summary;
-        const history = data.data.history;
-
-        let html = `
-          <p class="label">Nomor Resi:</p> ${detail.waybill_number}
-          <p class="label">Kurir:</p> ${detail.courier_name}
-          <p class="label">Status:</p> ${detail.status}
-          <p class="label">Dikirim dari:</p> ${detail.origin} ke ${detail.destination}
-          <hr>
-          <p class="label">Riwayat Pengiriman:</p>
-          <ul>
-            ${history.map(h => `<li>${h.date} - ${h.description} (${h.location})</li>`).join('')}
-          </ul>
-        `;
-
-        resultDiv.innerHTML = html;
-
       } catch (err) {
-        console.error(err);
-        resultDiv.innerHTML = `<p style="color:red;">Terjadi kesalahan saat menghubungi server.</p>`;
+        result.textContent = 'Gagal cek resi. Coba lagi nanti.';
       }
     });
   </script>
-
 </body>
 </html>
