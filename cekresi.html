@@ -8,9 +8,10 @@
     body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
     h1 { color: #333; }
     form { margin-top: 20px; }
-    input[type="text"] {
-      padding: 10px; width: 250px; font-size: 16px;
-      border: 1px solid #ccc; border-radius: 4px;
+    input, select {
+      padding: 10px; margin-right: 10px;
+      font-size: 16px; border: 1px solid #ccc;
+      border-radius: 4px;
     }
     button {
       padding: 10px 15px; font-size: 16px;
@@ -18,7 +19,8 @@
       border-radius: 4px; cursor: pointer;
     }
     button:hover { background-color: #0056b3; }
-    #result { margin-top: 20px; }
+    #result { margin-top: 20px; padding: 10px; background: #fff; border-radius: 4px; }
+    .label { font-weight: bold; margin-top: 10px; display: block; }
   </style>
 </head>
 <body>
@@ -27,21 +29,73 @@
   
   <form id="cekResiForm">
     <input type="text" id="resiNumber" placeholder="Masukkan nomor resi..." required />
+    <select id="kurir" required>
+      <option value="jne">JNE</option>
+      <option value="tiki">TIKI</option>
+      <option value="pos">POS</option>
+    </select>
     <button type="submit">Cek</button>
   </form>
 
   <div id="result"></div>
 
   <script>
-    document.getElementById('cekResiForm').addEventListener('submit', function(e) {
+    const form = document.getElementById('cekResiForm');
+    const resultDiv = document.getElementById('result');
+
+    form.addEventListener('submit', async function(e) {
       e.preventDefault();
       const resi = document.getElementById('resiNumber').value.trim();
-      if (!resi) {
-        alert('Nomor resi tidak boleh kosong!');
+      const kurir = document.getElementById('kurir').value;
+
+      if (!resi || !kurir) {
+        alert('Nomor resi dan kurir harus diisi.');
         return;
       }
-      // Tampilkan nomor resi sementara
-      document.getElementById('result').innerHTML = `<p>Nomor resi yang Anda masukkan: <strong>${resi}</strong></p>`;
+
+      resultDiv.innerHTML = 'Memproses...';
+
+      try {
+        const response = await fetch('https://rajaongkir.komerce.id/api/v1/waybills', {
+          method: 'POST',
+          headers: {
+            'key': 'PCRVugDy921e93219a74c87ae0Lhg5lB',
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: new URLSearchParams({
+            waybill: resi,
+            courier: kurir
+          })
+        });
+
+        const data = await response.json();
+
+        if (data.status.code !== 200) {
+          resultDiv.innerHTML = `<p style="color:red;">Gagal: ${data.status.description}</p>`;
+          return;
+        }
+
+        const detail = data.data.summary;
+        const history = data.data.history;
+
+        let html = `
+          <p class="label">Nomor Resi:</p> ${detail.waybill_number}
+          <p class="label">Kurir:</p> ${detail.courier_name}
+          <p class="label">Status:</p> ${detail.status}
+          <p class="label">Dikirim dari:</p> ${detail.origin} ke ${detail.destination}
+          <hr>
+          <p class="label">Riwayat Pengiriman:</p>
+          <ul>
+            ${history.map(h => `<li>${h.date} - ${h.description} (${h.location})</li>`).join('')}
+          </ul>
+        `;
+
+        resultDiv.innerHTML = html;
+
+      } catch (err) {
+        console.error(err);
+        resultDiv.innerHTML = `<p style="color:red;">Terjadi kesalahan saat menghubungi server.</p>`;
+      }
     });
   </script>
 
