@@ -30,14 +30,15 @@
     padding: 1rem 2rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     z-index: 1000;
   }
   .logo {
-    font-weight: 700;
-    font-size: 1.6rem;
+    font-weight: 900;
+    font-size: 2.8rem; /* diperbesar */
     color: #2ecc71;
     cursor: pointer;
+    letter-spacing: 1.5px;
   }
 
   /* Banner Hero */
@@ -45,22 +46,24 @@
     margin-top: 70px; /* untuk header */
     background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
     color: white;
-    padding: 80px 20px;
+    padding: 80px 20px 50px;
     text-align: center;
     border-radius: 0 0 40px 40px;
     box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
   }
   .hero h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    margin-bottom: 20px;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    font-size: 1.4rem; /* diperkecil */
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-shadow: none;
+    color: #dff0d8;
   }
   .hero p {
-    font-size: 1.3rem;
+    font-size: 1rem;
     margin-bottom: 30px;
-    font-weight: 500;
-    text-shadow: 0 1px 5px rgba(0,0,0,0.2);
+    font-weight: 400;
+    color: #c8e6c9;
+    text-shadow: none;
   }
   .btn-primary {
     background: #27ae60;
@@ -145,10 +148,13 @@
   /* Responsive text scaling */
   @media (max-width: 600px) {
     .hero h1 {
-      font-size: 2.2rem;
+      font-size: 1.2rem;
     }
     .hero p {
-      font-size: 1.1rem;
+      font-size: 0.9rem;
+    }
+    .logo {
+      font-size: 2rem;
     }
   }
 </style>
