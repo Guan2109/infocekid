@@ -4,285 +4,309 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>InfoCek.id – Portal Cek Praktis Sehari-hari</title>
-  <meta name="description" content="InfoCek.id adalah portal praktis buat cek resi, cuaca, jadwal bola, harga emas, dan legalitas rekening dengan cepat dan simpel.">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-
-  <!-- Font Awesome untuk ikon -->
+  <meta name="description" content="InfoCek.id adalah portal praktis buat cek resi, cuaca, jadwal bola, harga emas, dan legalitas rekening dengan cepat dan simpel." />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  
+  <!-- Font Awesome CDN -->
   <link
-    rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    integrity="sha512-papbDnl2EB7hOd32oF0+Wf9X/+oA9BqMK+ueaOy2XqwMbM71D7ZtTtF9JoG4C2ULlMK6lbXaq9KnB9Y7SjHboQ=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
+    rel="stylesheet"
   />
 
   <style>
-    /* Reset */
+    /* Reset & basics */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #fffbe6;
-      color: #333;
+      background-color: #fff8e1;
+      color: #5a3e00;
       line-height: 1.6;
       padding: 20px;
+      transition: background-color 0.3s ease, color 0.3s ease;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      scroll-behavior: smooth;
     }
 
-    /* Header Bar */
-    .header-bar {
+    /* Header */
+    header.header-bar {
+      background: #f0c419;
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(240, 196, 25, 0.4);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #ffc107;
-      color: #222;
-      padding: 15px 25px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-      transition: background-color 0.3s ease;
-      user-select: none;
+      animation: fadeInDown 0.7s ease forwards;
+      margin-bottom: 25px;
     }
-    .header-bar:hover {
-      background-color: #e6b800;
-    }
-
-    .logo {
-      font-size: 28px;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      cursor: default;
+    header .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #5a3e00;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
-    .logo i {
-      color: #d17b00;
-      animation: spin 6s linear infinite;
+    header .logo i {
+      color: #5a3e00;
+      animation: bounce 1.5s infinite;
     }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .tagline {
-      font-size: 16px;
-      font-weight: 500;
-      color: #444;
+    header .tagline {
       font-style: italic;
-    }
-
-    /* Navigation Bar */
-    nav {
-      position: sticky;
-      top: 70px;
-      background: #fff9d6;
-      padding: 12px 25px;
-      border-radius: 10px;
-      border: 1px solid #e1c542;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.08);
-      margin-bottom: 25px;
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
-      z-index: 1000;
-      transition: box-shadow 0.3s ease;
+      color: #704b00;
+      font-size: 1rem;
       user-select: none;
     }
-    nav:hover {
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-    }
 
+    /* Nav */
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 30px;
+      justify-content: center;
+      animation: fadeInUp 0.7s ease forwards;
+    }
     nav a {
-      text-decoration: none;
-      color: #d17b00;
+      background: #f0c419;
+      color: #5a3e00;
+      padding: 10px 18px;
+      border-radius: 8px;
       font-weight: 600;
-      font-size: 16px;
-      padding: 6px 10px;
-      border-radius: 6px;
-      transition: background-color 0.25s ease, color 0.25s ease;
-      position: relative;
+      font-size: 1rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 3px 5px rgba(240,196,25,0.5);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      user-select: none;
     }
     nav a:hover,
     nav a:focus {
-      background-color: #d17b00;
-      color: #fff;
+      background: #d9a800;
       outline: none;
+      transform: scale(1.05);
+      box-shadow: 0 5px 8px rgba(217,168,0,0.7);
+      color: #fff8e1;
     }
-    nav a .fa-solid {
-      margin-left: 6px;
-      font-size: 12px;
-      vertical-align: middle;
-      opacity: 0.7;
-      transition: opacity 0.3s ease;
+    nav a i {
+      font-size: 1.2rem;
     }
-    nav a:hover .fa-solid {
-      opacity: 1;
-    }
-
-    /* Tooltip */
-    nav a[data-tooltip]:hover::after {
+    nav a[data-tooltip]:hover::after,
+    nav a[data-tooltip]:focus::after {
       content: attr(data-tooltip);
       position: absolute;
-      bottom: 125%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #d17b00;
-      color: #fff;
-      padding: 5px 8px;
-      border-radius: 5px;
-      font-size: 12px;
+      bottom: 45px;
+      background: #5a3e00;
+      color: #fff8e1;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
       white-space: nowrap;
       opacity: 0.9;
       pointer-events: none;
       user-select: none;
-      z-index: 10;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: opacity 0.3s ease;
     }
 
-    /* Main Container */
-    .container {
-      max-width: 800px;
-      margin: auto;
-      background: #fff;
-      padding: 30px 25px;
+    /* Main container */
+    main.container {
+      background: #fffbe6;
+      padding: 25px 30px;
       border-radius: 12px;
-      box-shadow: 0 0 18px rgba(0,0,0,0.12);
-      transition: box-shadow 0.3s ease;
+      max-width: 900px;
+      margin: 0 auto 40px auto;
+      box-shadow: 0 5px 15px rgba(240, 196, 25, 0.3);
+      animation: fadeIn 1s ease forwards;
+      flex-grow: 1;
     }
-    .container:hover {
-      box-shadow: 0 0 28px rgba(0,0,0,0.18);
-    }
-
-    h3 {
+    main h3 {
+      color: #a67c00;
       margin-bottom: 15px;
-      color: #b37400;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+      font-size: 1.8rem;
     }
-
-    p {
-      font-size: 17px;
-      margin-bottom: 18px;
-      color: #4d4d4d;
+    main p {
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+      color: #5a3e00;
     }
-
-    ul {
+    main ul {
       margin-top: 15px;
       padding-left: 20px;
-      list-style-type: disc;
+      list-style-type: square;
       color: #6b4e00;
-      font-weight: 600;
+      font-size: 1rem;
+      line-height: 1.5;
     }
-    li {
-      margin-bottom: 12px;
-      font-size: 16px;
-      line-height: 1.4;
-    }
-
-    /* Links inside list */
-    ul li a {
-      color: #d17b00;
-      font-weight: 700;
-      transition: color 0.25s ease;
+    main ul li {
+      margin-bottom: 8px;
       position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
     }
-    ul li a:hover,
-    ul li a:focus {
-      color: #a05a00;
-      text-decoration: underline;
-      outline: none;
-    }
-    ul li a .fa-solid {
-      font-size: 14px;
-      opacity: 0.85;
-      transition: transform 0.3s ease;
-    }
-    ul li a:hover .fa-solid {
-      transform: translateX(4px);
-    }
-
-    /* Badge Styles */
-    .badge {
-      font-size: 12px;
-      padding: 3px 8px;
-      border-radius: 12px;
-      margin-left: 10px;
-      vertical-align: middle;
+    main ul li .badge {
+      font-size: 0.8rem;
       font-weight: 700;
+      color: #fff8e1;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 8px;
       user-select: none;
-      box-shadow: 0 0 6px rgba(0,0,0,0.05);
-      transition: background-color 0.3s ease, color 0.3s ease, transform 0.4s ease;
-      display: inline-block;
-      animation: fadeInUp 0.8s ease forwards;
-      opacity: 0;
+      vertical-align: middle;
     }
     .badge.aktif {
-      background-color: #28a745;
-      color: #fff;
-      animation-delay: 0.3s;
+      background-color: #9e7c00;
     }
     .badge.segera {
-      background-color: #ffc107;
-      color: #222;
-      border: 1px solid #d1a300;
-      animation-delay: 0.5s;
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      background-color: #f5a623;
     }
 
     /* Footer */
     footer {
-      margin-top: auto;
       text-align: center;
-      font-size: 14px;
-      color: #777;
-      padding: 15px 10px;
+      font-size: 0.9rem;
+      color: #8c6d00;
+      padding: 12px 0;
+      border-top: 1px solid #f0c419;
       user-select: none;
     }
 
-    /* Scroll To Top Button */
+    /* Scroll to top button */
     #scrollTopBtn {
       position: fixed;
       bottom: 30px;
       right: 30px;
-      background-color: #d17b00;
-      color: white;
+      background-color: #f0c419;
+      color: #5a3e00;
       border: none;
-      padding: 12px 16px;
+      padding: 12px 14px;
       border-radius: 50%;
-      font-size: 20px;
       cursor: pointer;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-      user-select: none;
-      z-index: 1500;
+      box-shadow: 0 4px 8px rgba(240,196,25,0.5);
+      font-size: 1.2rem;
+      display: none;
+      transition: background-color 0.3s ease;
+      z-index: 1000;
     }
     #scrollTopBtn.show {
-      opacity: 1;
-      pointer-events: auto;
-   
+      display: block;
+      animation: fadeIn 0.4s ease forwards;
+    }
+    #scrollTopBtn:hover {
+      background-color: #d9a800;
+      color: #fff8e1;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header-bar" role="banner">
+    <div class="logo" aria-label="Logo InfoCek.id">
+      <i class="fa-solid fa-check-double" aria-hidden="true"></i> InfoCek.id
+    </div>
+    <div class="tagline">Portal Cek Praktis Sehari-hari</div>
+  </header>
+
+  <nav role="navigation" aria-label="Menu Utama">
+    <a href="/cek-resi" data-tooltip="Cek Nomor Resi Pengiriman" tabindex="0">
+      Cek Resi <i class="fa-solid fa-truck-fast" aria-hidden="true"></i>
+    </a>
+    <a href="/jadwal-bola" data-tooltip="Jadwal Pertandingan Sepak Bola" tabindex="0">
+      Jadwal Bola <i class="fa-solid fa-futbol" aria-hidden="true"></i>
+    </a>
+    <a href="/cuaca" data-tooltip="Informasi Cuaca Harian dan Mingguan" tabindex="0">
+      Cuaca <i class="fa-solid fa-cloud-sun" aria-hidden="true"></i>
+    </a>
+    <a href="/harga-emas" data-tooltip="Harga Emas Terbaru" tabindex="0">
+      Harga Emas <i class="fa-solid fa-coins" aria-hidden="true"></i>
+    </a>
+    <a href="/harga-bitcoin" data-tooltip="Harga Bitcoin Hari Ini" tabindex="0">
+      Harga Bitcoin <i class="fa-brands fa-bitcoin" aria-hidden="true"></i>
+    </a>
+    <a href="/legalitas-rekening" data-tooltip="Cek Legalitas Nomor Rekening" tabindex="0">
+      Legalitas Rekening <i class="fa-solid fa-file-check" aria-hidden="true"></i>
+    </a>
+  </nav>
+
+  <main class="container" role="main">
+    <h3>Selamat datang di InfoCek.id</h3>
+    <p>
+      InfoCek.id adalah portal praktis yang membantu kamu melakukan berbagai pengecekan penting sehari-hari secara cepat dan mudah. Nggak perlu ribet, tinggal klik menu di atas sesuai kebutuhan kamu.
+    </p>
+    <p>
+      Fitur-fitur kami meliputi:
+    </p>
+    <ul>
+      <li>Cek nomor resi pengiriman paket secara real-time <span class="badge aktif" aria-label="Fitur aktif">Aktif</span></li>
+      <li>Jadwal pertandingan sepak bola terbaru dan update <span class="badge segera" aria-label="Fitur segera hadir">Segera</span></li>
+      <li>Informasi prakiraan cuaca harian dan mingguan</li>
+      <li>Harga emas terbaru dengan update cepat</li>
+      <li>Harga Bitcoin dan mata uang digital lainnya</li>
+      <li>Cek legalitas nomor rekening secara aman dan terpercaya</li>
+    </ul>
+    <p>
+      Gunakan menu navigasi di atas untuk akses cepat ke fitur-fitur tersebut.
+    </p>
+    <p>
+      Jangan lupa follow sosial media kami buat update terbaru: 
+      <a href="https://twitter.com/InfoCekID" target="_blank" rel="noopener" aria-label="Twitter InfoCekID" style="color:#5a3e00;">
+        Twitter <i class="fa-brands fa-twitter"></i>
+      </a>, 
+      <a href="https://facebook.com/InfoCekID" target="_blank" rel="noopener" aria-label="Facebook InfoCekID" style="color:#5a3e00;">
+        Facebook <i class="fa-brands fa-facebook"></i>
+      </a>, dan 
+      <a href="https://instagram.com/InfoCekID" target="_blank" rel="noopener" aria-label="Instagram InfoCekID" style="color:#5a3e00;">
+        Instagram <i class="fa-brands fa-instagram"></i>
+      </a>.
+    </p>
+  </main>
+
+  <footer role="contentinfo">
+    &copy; 2025 InfoCek.id - Semua hak cipta dilindungi.
+  </footer>
+
+  <button id="scrollTopBtn" aria-label="Scroll ke atas" title="Scroll ke atas">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <script>
+    // Scroll to Top Button
+    const scrollBtn = document.getElementById('scrollTopBtn');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 200) {
+        scrollBtn.classList.add('show');
+      } else {
+        scrollBtn.classList.remove('show');
+      }
+    });
+
+    scrollBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+
+</body>
+</html>
