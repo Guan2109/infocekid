@@ -1,222 +1,206 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>InfoCek.id – Portal Cek Praktis Sehari-hari</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-<style>
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-  }
-  body {
-    font-family: 'Poppins', sans-serif;
-    background: #f5f7fa;
-    color: #333;
-  }
-  a {
-    color: #1e90ff;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-
-  header {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    background: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-    padding: 1rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    z-index: 800;
-    height: 40px;
-  }
-  .logo {
-    font-weight: 900;
-    font-size: 1.6rem;
-    color: #2ecc71;
-    cursor: pointer;
-    letter-spacing: 1.5px;
-  }
-
-  .hero {
-    margin-top: 60px; /* space dari header fixed */
-    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
-    color: white;
-    padding: 80px 20px 60px;
-    text-align: center;
-    border-radius: 0 0 40px 40px;
-    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
-    user-select: none;
-  }
-  .hero h1 {
-    font-weight: 900;
-    font-size: 3rem; /* besar banget untuk InfoCek.id */
-    margin-bottom: 10px;
-    letter-spacing: 2px;
-    text-shadow: 1px 1px 6px rgba(0,0,0,0.25);
-  }
-  .hero p {
-  
-    font-weight: 500;
-    color: #dff0d8;
-    margin-top: 0;
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.15);
-  }
-  .btn-primary {
-    background: #27ae60;
-    color: white;
-    border: none;
-    padding: 16px 40px;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 8px 15px rgba(39,174,96,0.4);
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-    margin-top: 40px;
-  }
-  .btn-primary:hover {
-    background: #1e8449;
-    box-shadow: 0 12px 20px rgba(30,132,73,0.6);
-  }
-
-  main {
-    max-width: 1100px;
-    margin: 50px auto 80px;
-    padding: 0 20px;
-  }
-
-  .card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 30px;
-  }
-  .card {
-    background: white;
-    border-radius: 18px;
-    padding: 25px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.07);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-  }
-  .card:hover {
-    transform: translateY(-12px);
-    box-shadow: 0 14px 40px rgba(39,174,96,0.25);
-  }
-  .card-icon {
-    font-size: 64px;
-    color: #27ae60;
-    margin-bottom: 20px;
-  }
-  .card-title {
-    font-weight: 700;
-    font-size: 1.4rem;
-    margin-bottom: 10px;
-    color: #2c3e50;
-  }
-  .card-desc {
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 18px;
-    min-height: 60px;
-  }
-  .card-button {
-    background: #2ecc71;
-    border: none;
-    color: white;
-    padding: 12px 30px;
-    border-radius: 40px;
-    font-weight: 700;
-    font-size: 1rem;
-    transition: background 0.3s ease;
-  }
-  .card-button:hover {
-    background: #27ae60;
-  }
-
-  footer {
-    text-align: center;
-    padding: 1.5rem 1rem;
-    background: #ecf0f1;
-    color: #7f8c8d;
-    font-size: 0.9rem;
-  }
-
-  /* Responsive */
-  @media (max-width: 600px) {
-    .hero h1 {
-      font-size: 2.2rem;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InfoCek.id – Portal Cek Praktis Sehari-hari</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    .hero p {
-      font-size: 1rem;
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+    header {
+      background: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
     }
     .logo {
-      font-size: 1.4rem;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #27ae60;
+      cursor: pointer;
     }
-  }
-</style>
+    nav a {
+      margin-left: 20px;
+      color: #333;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    nav a:hover {
+      color: #27ae60;
+    }
+    .hero {
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+      color: #fff;
+      padding: 100px 20px 80px;
+      text-align: center;
+      margin-top: 60px;
+      border-radius: 0 0 40px 40px;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #dff0d8;
+    }
+    .btn-primary {
+      background: #fff;
+      color: #27ae60;
+      border: none;
+      padding: 14px 32px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 40px;
+      margin-top: 30px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: #27ae60;
+      color: #fff;
+    }
+    main {
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 20px;
+    }
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    .card {
+      background: #fff;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+    }
+    .card-icon {
+      font-size: 48px;
+      color: #27ae60;
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+    .card-desc {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 20px;
+    }
+    .card-button {
+      padding: 10px 24px;
+      background: #2ecc71;
+      color: white;
+      border: none;
+      font-weight: 600;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+    .card-button:hover {
+      background: #1e8449;
+    }
+    footer {
+      background: #ecf0f1;
+      text-align: center;
+      padding: 1.5rem;
+      color: #7f8c8d;
+      font-size: 0.9rem;
+    }
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2.2rem; }
+      .hero p { font-size: 1rem; }
+    }
+  </style>
 </head>
 <body>
 
 <header>
   <div class="logo" onclick="location.href='index.html'">InfoCek.id</div>
+  <nav>
+    <a href="#features">Fitur</a>
+    <a href="#tentang">Tentang</a>
+    <a href="#kontak">Kontak</a>
+  </nav>
 </header>
 
-<section class="hero" role="banner" aria-label="Banner utama InfoCek">
+<section class="hero">
   <h1>InfoCek.id</h1>
-  <p>Portal Cek Praktis Sehari-hari</p>
-  <button class="btn-primary" onclick="location.href='#features'">Cek Fitur Sekarang</button>
+  <p>Portal Cek Praktis Sehari-hari untuk Kebutuhanmu</p>
+  <button class="btn-primary" onclick="location.href='#features'">Lihat Fitur</button>
 </section>
 
 <main>
-  <section id="features" class="card-container" aria-label="Fitur InfoCek.id">
-
-    <div class="card" onclick="location.href='cekresi.html'" role="button" tabindex="0">
-      <div class="card-icon" aria-hidden="true">📦</div>
+  <section id="features" class="card-container">
+    <div class="card" data-aos="fade-up" onclick="location.href='cekresi.html'">
+      <div class="card-icon">📦</div>
       <div class="card-title">Cek Resi</div>
-      <div class="card-desc">Lacak paket kirimanmu dengan mudah dan cepat.</div>
+      <div class="card-desc">Lacak kirimanmu dari berbagai ekspedisi secara instan.</div>
       <button class="card-button">Cek Sekarang</button>
     </div>
-
-    <div class="card" onclick="location.href='#jadwalbola'" role="button" tabindex="0">
-      <div class="card-icon" aria-hidden="true">⚽</div>
+    <div class="card" data-aos="fade-up" onclick="location.href='#jadwalbola'">
+      <div class="card-icon">⚽</div>
       <div class="card-title">Jadwal Bola</div>
-      <div class="card-desc">Update jadwal pertandingan sepak bola terbaru.</div>
+      <div class="card-desc">Informasi jadwal pertandingan bola terkini dan terupdate.</div>
       <button class="card-button">Lihat Jadwal</button>
     </div>
-
-    <div class="card" onclick="location.href='#cuaca'" role="button" tabindex="0">
-      <div class="card-icon" aria-hidden="true">☀️</div>
-      <div class="card-title">Cuaca</div>
-      <div class="card-desc">Pantau kondisi cuaca di kotamu secara real-time.</div>
+    <div class="card" data-aos="fade-up" onclick="location.href='#cuaca'">
+      <div class="card-icon">☀️</div>
+      <div class="card-title">Info Cuaca</div>
+      <div class="card-desc">Pantau cuaca harian di berbagai kota Indonesia.</div>
       <button class="card-button">Cek Cuaca</button>
     </div>
-
-    <div class="card" onclick="location.href='#harga'" role="button" tabindex="0">
-      <div class="card-icon" aria-hidden="true">💰</div>
+    <div class="card" data-aos="fade-up" onclick="location.href='#harga'">
+      <div class="card-icon">💰</div>
       <div class="card-title">Harga Emas & Crypto</div>
-      <div class="card-desc">Harga emas, bitcoin, dan dollar terbaru setiap hari.</div>
+      <div class="card-desc">Pantau harga emas, bitcoin, dan dollar terbaru.</div>
       <button class="card-button">Lihat Harga</button>
     </div>
-
-    <div class="card" onclick="location.href='#legalitas'" role="button" tabindex="0">
-      <div class="card-icon" aria-hidden="true">🔍</div>
-      <div class="card-title">Legalitas Nomor</div>
-      <div class="card-desc">Cek keaslian dan legalitas nomor rekening dengan mudah.</div>
+    <div class="card" data-aos="fade-up" onclick="location.href='#legalitas'">
+      <div class="card-icon">🔍</div>
+      <div class="card-title">Cek Nomor Rekening</div>
+      <div class="card-desc">Cek legalitas rekening dan hindari penipuan online.</div>
       <button class="card-button">Cek Sekarang</button>
     </div>
-
   </section>
 </main>
 
 <footer>
-  © 2025 InfoCek.id | Developed by InfoCekid
+  © 2025 InfoCek.id – Dibuat dengan ❤️ oleh InfoCekid
 </footer>
 
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init();</script>
 </body>
 </html>
