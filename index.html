@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>InfoCek.id - Portal Cek Sehari-hari</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    header, footer { background: #2c3e50; color: white; padding: 1rem; text-align: center; }
+    nav { background: #34495e; padding: 0.5rem; }
+    nav a { color: white; margin: 0 1rem; text-decoration: none; font-weight: bold; }
+    nav a:hover { text-decoration: underline; }
+    main { padding: 1rem; }
+    section { margin-bottom: 2rem; }
+    .feature-btn {
+      display: inline-block; background: #3498db; color: white; padding: 1rem 2rem;
+      margin: 0.5rem; border-radius: 5px; text-decoration: none; font-weight: bold;
+    }
+    .feature-btn:hover { background: #2980b9; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>InfoCek.id</h1>
+  <p>Portal Cek Praktis Sehari-hari</p>
+</header>
+
+<nav>
+  <a href="#cek-resi">Cek Resi</a>
+  <a href="#jadwal-bola">Jadwal Bola</a>
+  <a href="#harga-emas">Harga Emas</a>
+  <a href="#cuaca">Cuaca</a>
+</nav>
+
+<main>
+  <section id="cek-resi">
+    <h2>Cek Resi Paket</h2>
+    <form onsubmit="return false;">
+      <input type="text" id="resiInput" placeholder="Masukkan nomor resi..." style="width:300px; padding:0.5rem;" />
+      <button onclick="alert('Fungsi cek resi akan dikembangkan')" style="padding:0.5rem 1rem;">Cek</button>
+    </form>
+    <p>Untuk cek resi, kamu bisa langsung kunjungi situs resmi JNE, J&T, dll.</p>
+    <ul>
+      <li><a href="https://www.jne.co.id/id/tracking/trace" target="_blank">Cek Resi JNE</a></li>
+      <li><a href="https://www.jet.co.id/cek-resi" target="_blank">Cek Resi J&T</a></li>
+      <li><a href="https://tiki.id/cek-resi" target="_blank">Cek Resi TIKI</a></li>
+    </ul>
+  </section>
+
+  <section id="jadwal-bola">
+    <h2>Jadwal Bola Hari Ini</h2>
+    <p>Untuk jadwal bola lengkap, kunjungi <a href="https://www.livescore.com" target="_blank">LiveScore.com</a></p>
+  </section>
+
+  <section id="harga-emas">
+    <h2>Harga Emas Hari Ini</h2>
+    <p>Harga emas dapat berubah setiap hari. Contoh harga Antam:</p>
+    <ul>
+      <li>Emas 24K 1 gram: Rp 1.000.000</li>
+      <li>Emas 24K 5 gram: Rp 4.900.000</li>
+    </ul>
+    <p>(Update manual dulu, nanti bisa pakai API atau embed spreadsheet)</p>
+  </section>
+
+  <section id="cuaca">
+    <h2>Cuaca Hari Ini</h2>
+    <p>Untuk prakiraan cuaca detail, kunjungi <a href="https://www.weather.com" target="_blank">Weather.com</a></p>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 InfoCek.id | Portal Cek Praktis Sehari-hari</p>
+</footer>
+
+</body>
+</html>
