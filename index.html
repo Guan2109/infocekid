@@ -3,217 +3,174 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cek Resi & Ongkir - RajaOngkir</title>
+  <title>Cek Resi Manual - InfoCek.id</title>
   <style>
-    body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; padding: 0 10px; }
-    h1 { text-align: center; }
-    .tabs { display: flex; justify-content: center; margin-bottom: 15px; }
-    .tab {
-      padding: 10px 20px;
-      cursor: pointer;
-      border-bottom: 3px solid transparent;
-      user-select: none;
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+      margin: 0;
     }
-    .tab.active {
-      border-color: #007bff;
-      font-weight: bold;
-      color: #007bff;
+    h1 {
+      margin-bottom: 30px;
+      font-weight: 900;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
     }
-    form { margin-bottom: 20px; }
-    label { display: block; margin: 10px 0 5px; }
-    input, select {
+    form {
+      background: rgba(255,255,255,0.15);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
       width: 100%;
-      padding: 8px;
+      max-width: 420px;
+      backdrop-filter: blur(10px);
       box-sizing: border-box;
     }
-    button {
-      margin-top: 15px;
-      padding: 10px;
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 600;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+    select, input {
       width: 100%;
-      background-color: #007bff;
+      padding: 12px 15px;
+      border-radius: 10px;
       border: none;
-      color: white;
+      margin-bottom: 20px;
       font-size: 16px;
+      font-weight: 600;
+      outline: none;
+      transition: background-color 0.3s ease;
+    }
+    select:hover, input:hover, select:focus, input:focus {
+      background-color: rgba(255,255,255,0.3);
       cursor: pointer;
     }
-    button:hover { background-color: #0056b3; }
-    #loading { display: none; text-align: center; margin: 10px 0; }
-    #result { display: none; border: 1px solid #ddd; padding: 15px; background: #f9f9f9; }
-    .service { margin-bottom: 10px; }
-    .service-name { font-weight: bold; }
-    .service-cost { color: green; }
+    button {
+      background: #fff;
+      color: #ff416c;
+      font-weight: 900;
+      padding: 15px;
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      letter-spacing: 1.5px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+      text-transform: uppercase;
+      box-shadow: 0 4px 15px rgba(255, 65, 108, 0.6);
+    }
+    button:hover {
+      background-color: #ffe3e6;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 14px;
+      opacity: 0.7;
+    }
   </style>
 </head>
 <body>
-  <h1>Cek Resi & Ongkir</h1>
-
-  <div class="tabs">
-    <div id="tabResi" class="tab active">Cek Resi</div>
-    <div id="tabOngkir" class="tab">Cek Ongkir</div>
-  </div>
-
-  <!-- Form Cek Resi -->
+  <h1>Cek Resi Manual</h1>
   <form id="resiForm">
-    <label for="courierResi">Kurir (contoh: jne, tiki, pos)</label>
-    <input type="text" id="courierResi" name="courierResi" placeholder="Masukkan nama kurir" required />
-    
-    <label for="trackingNumber">Nomor Resi</label>
-    <input type="text" id="trackingNumber" name="trackingNumber" placeholder="Masukkan nomor resi" required />
-    
-    <button type="submit">Cek Resi</button>
-  </form>
-
-  <!-- Form Cek Ongkir -->
-  <form id="ongkirForm" style="display:none;">
-    <label for="origin">Kota Asal (ID kota contoh: 501)</label>
-    <input type="number" id="origin" name="origin" placeholder="Masukkan ID kota asal" required />
-    
-    <label for="destination">Kota Tujuan (ID kota contoh: 114)</label>
-    <input type="number" id="destination" name="destination" placeholder="Masukkan ID kota tujuan" required />
-    
-    <label for="weight">Berat (gram)</label>
-    <input type="number" id="weight" name="weight" placeholder="Masukkan berat paket" required />
-    
-    <label for="courierOngkir">Kurir</label>
-    <select id="courierOngkir" name="courierOngkir" required>
-      <option value="">Pilih Kurir</option>
+    <label for="courier">Pilih Kurir</label>
+    <select id="courier" required>
+      <option value="" disabled selected>-- Pilih Kurir --</option>
       <option value="jne">JNE</option>
       <option value="tiki">TIKI</option>
       <option value="pos">POS Indonesia</option>
+      <option value="jnt">J&T Express</option>
+      <option value="sicepat">SiCepat</option>
+      <option value="wahana">Wahana</option>
+      <option value="ninja">Ninja Xpress</option>
+      <option value="pandu">Pandu Logistics</option>
+      <option value="sap">SAP Express</option>
+      <option value="jet">JET Express</option>
     </select>
-    
-    <button type="submit">Cek Ongkir</button>
+
+    <label for="tracking">Nomor Resi</label>
+    <input type="text" id="tracking" placeholder="Masukkan nomor resi" required autocomplete="off" />
+
+    <button type="submit">Cek Resi</button>
   </form>
 
-  <div id="loading">Loading...</div>
-  <div id="result"></div>
+  <footer>Powered by InfoCek.id &bull; Cek Resi Manual</footer>
 
   <script>
-    const API_KEY = 'fzNR9Qve921e93219a74c87aupJqU8D3'; // Ganti dengan API Key RajaOngkir kamu
+    const form = document.getElementById('resiForm');
 
-    const tabResi = document.getElementById('tabResi');
-    const tabOngkir = document.getElementById('tabOngkir');
-    const resiForm = document.getElementById('resiForm');
-    const ongkirForm = document.getElementById('ongkirForm');
-    const loading = document.getElementById('loading');
-    const result = document.getElementById('result');
-
-    // Fungsi pindah tab
-    tabResi.onclick = () => {
-      tabResi.classList.add('active');
-      tabOngkir.classList.remove('active');
-      resiForm.style.display = 'block';
-      ongkirForm.style.display = 'none';
-      result.style.display = 'none';
-    };
-    tabOngkir.onclick = () => {
-      tabOngkir.classList.add('active');
-      tabResi.classList.remove('active');
-      ongkirForm.style.display = 'block';
-      resiForm.style.display = 'none';
-      result.style.display = 'none';
+    // URL resmi cek resi tiap kurir
+    const courierUrls = {
+      jne: 'https://www.jne.co.id/id/tracking/trace',
+      tiki: 'https://tiki.id/cek-resi',
+      pos: 'https://posindonesia.co.id/trace',
+      jnt: 'https://jnt.shipper.id/track/waybill',
+      sicepat: 'https://www.sicepat.com/tracking',
+      wahana: 'https://tracking.wahana.com/',
+      ninja: 'https://www.ninjaxpress.co/id/tracking',
+      pandu: 'https://pandulogistics.co.id/tracking',
+      sap: 'https://sap-express.co.id/track',
+      jet: 'https://jet.co.id/cek-resi'
     };
 
-    // Form Cek Resi (Dummy data karena RajaOngkir starter gak support cek resi)
-    resiForm.onsubmit = async (e) => {
+    form.addEventListener('submit', e => {
       e.preventDefault();
-      const courier = resiForm.courierResi.value.trim();
-      const waybill = resiForm.trackingNumber.value.trim();
-      if (!courier || !waybill) {
-        alert('Kurir dan nomor resi harus diisi!');
+      const courier = form.courier.value;
+      const tracking = form.tracking.value.trim();
+
+      if (!courier || !tracking) {
+        alert('Silakan pilih kurir dan masukkan nomor resi.');
         return;
       }
-      loading.style.display = 'block';
-      result.style.display = 'none';
 
-      // Simulasi delay dan hasil dummy
-      setTimeout(() => {
-        loading.style.display = 'none';
-        result.style.display = 'block';
-        result.innerHTML = `
-          <h3>Detail Resi (${courier.toUpperCase()})</h3>
-          <p><b>No. Resi:</b> ${waybill}</p>
-          <p>Status: <span style="color:green;">Sedang dalam pengiriman</span></p>
-          <p>Update terakhir: 19 Mei 2025 10:00 WIB</p>
-          <p>Lokasi: Jakarta</p>
-          <hr />
-          <p>Perjalanan paket:</p>
-          <ul>
-            <li>19 Mei 2025 08:00 - Paket diterima di gudang</li>
-            <li>19 Mei 2025 09:00 - Paket dalam perjalanan</li>
-            <li>19 Mei 2025 10:00 - Paket sampai di Jakarta</li>
-          </ul>
-          <small><i>Catatan: Ini data contoh, untuk cek resi real kamu perlu API lain.</i></small>
-        `;
-      }, 1000);
-    };
-
-    // Fungsi fetch untuk RajaOngkir ongkir
-    async function fetchRajaOngkir(endpoint, body) {
-      try {
-        const res = await fetch('https://api.rajaongkir.com/starter/' + endpoint, {
-          method: 'POST',
-          headers: {
-            'key': API_KEY,
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: new URLSearchParams(body)
-        });
-        if (!res.ok) throw new Error('Network response was not ok');
-        const data = await res.json();
-        return data;
-      } catch (err) {
-        throw err;
-      }
-    }
-
-    // Form Cek Ongkir
-    ongkirForm.onsubmit = async (e) => {
-      e.preventDefault();
-      const origin = ongkirForm.origin.value.trim();
-      const destination = ongkirForm.destination.value.trim();
-      const weight = ongkirForm.weight.value.trim();
-      const courier = ongkirForm.courierOngkir.value;
-      if (!origin || !destination || !weight || !courier) {
-        alert('Semua kolom harus diisi!');
-        return;
-      }
-      loading.style.display = 'block';
-      result.style.display = 'none';
-
-      try {
-        const data = await fetchRajaOngkir('cost', {
-          origin,
-          destination,
-          weight,
-          courier
-        });
-        loading.style.display = 'none';
-
-        if (data.rajaongkir.status.code !== 200) {
-          alert('Error: ' + data.rajaongkir.status.description);
+      let url = '';
+      // Buat url cek resi sesuai kurir dengan nomor resi di query string (kalau bisa)
+      switch(courier) {
+        case 'jne':
+          url = `https://www.jne.co.id/id/tracking/trace?waybill=${encodeURIComponent(tracking)}`;
+          break;
+        case 'tiki':
+          url = `https://tiki.id/cek-resi?resi=${encodeURIComponent(tracking)}`;
+          break;
+        case 'pos':
+          url = `https://posindonesia.co.id/trace?resi=${encodeURIComponent(tracking)}`;
+          break;
+        case 'jnt':
+          url = `https://jnt.shipper.id/track/waybill?waybill=${encodeURIComponent(tracking)}`;
+          break;
+        case 'sicepat':
+          url = `https://www.sicepat.com/tracking?awb=${encodeURIComponent(tracking)}`;
+          break;
+        case 'wahana':
+          url = `https://tracking.wahana.com/?awb=${encodeURIComponent(tracking)}`;
+          break;
+        case 'ninja':
+          url = `https://www.ninjaxpress.co/id/tracking?tracking_number=${encodeURIComponent(tracking)}`;
+          break;
+        case 'pandu':
+          url = `https://pandulogistics.co.id/tracking?resi=${encodeURIComponent(tracking)}`;
+          break;
+        case 'sap':
+          url = `https://sap-express.co.id/track?resi=${encodeURIComponent(tracking)}`;
+          break;
+        case 'jet':
+          url = `https://jet.co.id/cek-resi?resi=${encodeURIComponent(tracking)}`;
+          break;
+        default:
+          alert('Kurir belum didukung.');
           return;
-        }
-
-        const costs = data.rajaongkir.results[0].costs;
-        let html = `<h3>Ongkir ${data.rajaongkir.results[0].name} (${courier.toUpperCase()})</h3>`;
-        costs.forEach(service => {
-          html += `
-            <div class="service">
-              <div class="service-name">${service.service}</div>
-              <div class="service-cost">Rp ${service.cost[0].value.toLocaleString()} - Estimasi ${service.cost[0].etd} hari</div>
-              <div class="service-desc">${service.description}</div>
-            </div>
-          `;
-        });
-        result.innerHTML = html;
-        result.style.display = 'block';
-
-      } catch (err) {
-        loading.style.display = 'none';
-        alert('Gagal cek ongkir: ' + err.message);
       }
-    };
+
+      // Buka halaman cek resi resmi kurir di tab baru
+      window.open(url, '_blank');
+    });
   </script>
 </body>
 </html>
