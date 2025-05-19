@@ -1,90 +1,254 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="InfoCek.id - Portal Cek Praktis Sehari-hari: Resi, Ongkir, Cuaca, Jadwal Bola, Harga Emas & Bitcoin, dan lainnya." />
-  <meta name="keywords" content="cek resi, jadwal bola, harga emas, cuaca hari ini, info praktis, infocek.id" />
-  <meta name="author" content="InfoCek.id" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://infocekid.github.io/" />
-  <title>InfoCek.id - Portal Cek Praktis Sehari-hari</title>
-  <meta name="google-site-verification" content="y8odUdhcPegBsECqzaKFvdijukXeV7TACwBiUu4rmAo" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: #87cefa; color: #333; line-height: 1.6; }
-    header { background: 03a9f4; color: white; padding: 20px 0; text-align: center; }
-    header h1 { font-size: 2rem; }
-    nav { background: #add8e6; text-align: center; }
-    nav a { color: white; padding: 15px 20px; display: inline-block; text-decoration: none; font-weight: bold; }
-    nav a:hover { background: #004a99; }
-    main { padding: 30px 20px; max-width: 1000px; margin: auto; }
-    section { margin-bottom: 40px; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-    section h2 { margin-bottom: 15px; color: #007aff; }
-    footer { text-align: center; padding: 20px; background: #eee; font-size: 0.9rem; color: #666; }
-    .cta-button { background: #007aff; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-block; margin-top: 10px; }
-    .cta-button:hover { background: #005bb5; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cek Resi Paket - InfoCek.id</title>
+<meta name="description" content="Cek resi paket dengan mudah dan cepat. Tracking paket dari berbagai kurir populer di Indonesia." />
+<style>
+  /* Warna dan font */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #000; /* hitam supaya warna neon lebih keluar */
+    color: #fff;
+    margin: 0; padding: 0;
+    display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+  }
+
+  header {
+    background: linear-gradient(90deg, #FF3B3B, #FFD700, #FF8C00, #32CD32);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+    width: 100%;
+    padding: 25px 0;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-shadow: 0 0 10px #FFD700;
+  }
+
+  @keyframes gradientShift {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+
+  main {
+    background: #111;
+    border-radius: 12px;
+    padding: 30px;
+    margin: 20px;
+    width: 95%;
+    max-width: 480px;
+    box-shadow: 0 0 20px #FF3B3B, 0 0 40px #FFD700;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  select, input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 2px solid #FFD700;
+    font-size: 1rem;
+    font-weight: 500;
+    outline: none;
+    background: #222;
+    color: #fff;
+    box-shadow: 0 0 8px #FFD700;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  select:focus, input[type="text"]:focus {
+    border-color: #32CD32;
+    box-shadow: 0 0 12px #32CD32;
+  }
+
+  button {
+    background: #FF3B3B;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 15px;
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 0 15px #FF3B3B;
+    position: relative;
+    animation: blink 1.5s infinite alternate;
+    transition: box-shadow 0.3s ease;
+  }
+
+  button:hover {
+    box-shadow: 0 0 25px #FFD700, 0 0 35px #FF8C00;
+  }
+
+  @keyframes blink {
+    0% {box-shadow: 0 0 15px #FF3B3B;}
+    100% {box-shadow: 0 0 35px #FFD700, 0 0 40px #FF8C00;}
+  }
+
+  /* Glow effect on input and button */
+  input[type="text"], select, button {
+    transition: box-shadow 0.3s ease;
+  }
+  input[type="text"]:focus, select:focus, button:hover {
+    box-shadow:
+      0 0 12px #FFD700,
+      0 0 25px #FF8C00,
+      0 0 35px #32CD32;
+  }
+
+  /* Loading slot reel style */
+  .loading {
+    margin-top: 15px;
+    font-size: 2rem;
+    color: #FFD700;
+    text-align: center;
+    letter-spacing: 8px;
+    animation: slotReel 1.2s linear infinite;
+    user-select: none;
+  }
+
+  @keyframes slotReel {
+    0% {opacity: 1; text-shadow: 0 0 10px #FFD700;}
+    50% {opacity: 0.4; text-shadow: none;}
+    100% {opacity: 1; text-shadow: 0 0 10px #FFD700;}
+  }
+
+  /* Result styling */
+  .result {
+    margin-top: 20px;
+    background: #222;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #32CD32;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  /* Responsive */
+  @media (max-width: 520px) {
+    main {
+      padding: 20px;
+      margin: 15px;
+    }
+  }
+
+  footer {
+    margin-top: auto;
+    padding: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #999;
+  }
+</style>
 </head>
-
 <body>
-  <header>
-    <h1>InfoCek.id</h1>
-    <p>Portal Cek Praktis Sehari-hari</p>
-  </header>
 
-  <nav>
-    <a href="#resi">Cek Resi</a>
-    <a href="#ongkir">Cek Ongkir</a>
-    <a href="#cuaca">Cuaca</a>
-    <a href="#bola">Jadwal Bola</a>
-    <a href="#harga">Harga Emas/Bitcoin</a>
-    <a href="#rekening">Cek Penipuan</a>
-  </nav>
+<header>
+  InfoCek.id - Cek Resi Paket Mudah & Cepat
+</header>
 
-  <main>
-    <section id="resi">
-      <h2>🔍 Cek Resi Otomatis</h2>
-      <p>Masukkan nomor resi dari berbagai ekspedisi (JNE, J&T, SiCepat, dll) dan dapatkan status terkini pengiriman Anda.</p>
-      <a href="#" class="cta-button">Cek Resi Sekarang</a>
-    </section>
+<main>
+  <form id="cekResiForm">
+    <label for="courier">Pilih Kurir:</label>
+    <select id="courier" name="courier" required>
+      <option value="">-- Pilih Kurir --</option>
+      <option value="jne">JNE</option>
+      <option value="pos">POS Indonesia</option>
+      <option value="tiki">TIKI</option>
+      <option value="sicepat">SiCepat</option>
+      <option value="jnt">J&T Express</option>
+      <option value="wahana">Wahana</option>
+      <option value="jet">JET Express</option>
+      <option value="pcp">PCP</option>
+      <option value="pandu">Pandu Logistics</option>
+      <option value="lion">Lion Parcel</option>
+    </select>
 
-    <section id="ongkir">
-      <h2>📦 Cek Ongkir + Estimasi Sampai</h2>
-      <p>Simulasikan biaya kirim paket antar kota dan estimasi waktu sampainya.</p>
-      <a href="#" class="cta-button">Hitung Ongkir</a>
-    </section>
+    <label for="resi">Masukkan Nomor Resi:</label>
+    <input type="text" id="resi" name="resi" placeholder="Contoh: JNE1234567890" required />
 
-    <section id="cuaca">
-      <h2>🌤️ Cek Cuaca Hari Ini</h2>
-      <p>Dapatkan info cuaca real-time sesuai lokasi Anda. Cocok untuk rencana aktivitas harian.</p>
-      <a href="#" class="cta-button">Lihat Cuaca</a>
-    </section>
+    <button type="submit" id="cekBtn">Cek Resi Sekarang!</button>
+  </form>
 
-    <section id="bola">
-      <h2>⚽ Jadwal Bola & Prediksi Skor</h2>
-      <p>Lihat jadwal pertandingan, prediksi skor, dan tips taruhan aman (over/under, handicap, dll).</p>
-      <a href="#" class="cta-button">Lihat Jadwal & Prediksi</a>
-    </section>
+  <div id="loading" class="loading" style="display:none;">🎰🎰🎰</div>
+  <div id="result" class="result" style="display:none;"></div>
+</main>
 
-    <section id="harga">
-      <h2>💰 Harga Emas, Bitcoin & Dollar</h2>
-      <p>Pantau harga logam mulia dan kripto secara real-time, lengkap dengan grafik sederhana.</p>
-      <a href="#" class="cta-button">Cek Harga Sekarang</a>
-    </section>
+<footer>
+  © 2025 InfoCek.id - Semua hak dilindungi
+</footer>
 
-    <section id="rekening">
-      <h2>⚠️ Cek Nomor Rekening Penipu</h2>
-      <p>Masukkan nomor rekening atau NIK untuk memastikan legalitas dan menghindari penipuan online.</p>
-      <a href="#" class="cta-button">Periksa Sekarang</a>
-    </section>
-  </main>
+<script>
+  const form = document.getElementById('cekResiForm');
+  const loading = document.getElementById('loading');
+  const result = document.getElementById('result');
+  const cekBtn = document.getElementById('cekBtn');
 
-  <footer>
-    &copy; 2025 InfoCek.id | Solusi Cek Praktis Harian | Made with ❤️ in Indonesia
-  </footer>
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const courier = form.courier.value.trim();
+    const resi = form.resi.value.trim();
+
+    if (!courier || !resi) {
+      alert('Silakan pilih kurir dan masukkan nomor resi!');
+      return;
+    }
+
+    loading.style.display = 'block';
+    result.style.display = 'none';
+    cekBtn.disabled = true;
+
+    try {
+      // Ganti 'YOUR_API_KEY' dengan API key kamu dari binderbyte atau lainnya
+      const API_KEY = 'YOUR_API_KEY';
+      const url = `https://api.binderbyte.com/v1/track?api_key=${API_KEY}&courier=${courier}&awb=${resi}`;
+
+      const response = await fetch(url);
+      const data = await response.json();
+
+      loading.style.display = 'none';
+      cekBtn.disabled = false;
+
+      if (data.status === 200 && data.data) {
+        const res = data.data;
+        let html = `<strong>Status:</strong> ${res.summary.status}<br>`;
+        html += `<strong>Kurir:</strong> ${res.summary.courier}<br>`;
+        html += `<strong>Nomor Resi:</strong> ${res.summary.waybill_number}<br>`;
+        html += `<strong>Pengirim:</strong> ${res.detail[0].manifest_description || '-'}<br>`;
+        html += `<strong>Tujuan:</strong> ${res.detail[res.detail.length -1].manifest_description || '-'}<br>`;
+        html += `<hr>`;
+        html += `<strong>Detail Pengiriman:</strong><br>`;
+        html += `<ul>`;
+        res.detail.forEach(step => {
+          html += `<li>${step.manifest_date} - ${step.manifest_time} - ${step.manifest_description}</li>`;
+        });
+        html += `</ul>`;
+        result.innerHTML = html;
+        result.style.display = 'block';
+      } else {
+        result.innerHTML = `<strong>Data tidak ditemukan atau resi salah.</strong>`;
+        result.style.display = 'block';
+      }
+    } catch (error) {
+      loading.style.display = 'none';
+      cekBtn.disabled = false;
+      result.innerHTML = `<strong>Terjadi kesalahan. Coba lagi nanti.</strong>`;
+      result.style.display = 'block';
+      console.error(error);
+    }
+  });
+</script>
+
 </body>
-
 </html>
