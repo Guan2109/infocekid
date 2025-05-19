@@ -1,69 +1,51 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="InfoCek.id – Portal cek praktis sehari-hari. Cek resi, ongkir, cuaca, harga emas & Bitcoin, jadwal bola, rekening penipu dan lainnya dalam satu tempat.">
+  <meta name="keywords" content="cek resi, cek ongkir, cek cuaca, harga emas, harga bitcoin, jadwal bola, rekening penipu, tools praktis">
+  <meta name="author" content="InfoCek.id">
   <title>InfoCek.id – Portal Cek Praktis Sehari-hari</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
+      margin: 0; font-family: 'Segoe UI', sans-serif; background: #f9f9f9; color: #333;
     }
-
     header {
-      background-color: #007BFF;
-      color: white;
-      padding: 20px 0;
-      text-align: center;
+      background: #0066cc; color: white; padding: 20px 10px; text-align: center;
     }
-
+    header h1 {
+      margin: 0; font-size: 26px;
+    }
     nav {
-      background-color: #0056b3;
-      padding: 10px;
-      text-align: center;
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; padding: 20px 10px;
     }
-
-    nav a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
+    .tool {
+      background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); width: 220px; text-align: center;
+      transition: all 0.2s ease-in-out; text-decoration: none; color: inherit;
     }
-
-    nav a:hover {
-      text-decoration: underline;
+    .tool:hover {
+      transform: translateY(-5px); box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
-
-    main {
-      padding: 20px;
-      max-width: 800px;
-      margin: auto;
+    .tool i {
+      font-size: 30px; margin-bottom: 10px; color: #0066cc;
     }
-
-    section {
-      background-color: white;
-      margin-bottom: 20px;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    .cta {
+      margin: 30px auto; text-align: center;
     }
-
+    .cta button {
+      background: #0066cc; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 16px;
+      cursor: pointer; transition: background 0.2s ease;
+    }
+    .cta button:hover {
+      background: #004c99;
+    }
     footer {
-      background-color: #007BFF;
-      color: white;
-      text-align: center;
-      padding: 15px 0;
-      position: relative;
-      bottom: 0;
-      width: 100%;
-      margin-top: 40px;
+      text-align: center; padding: 20px; font-size: 14px; color: #666;
     }
   </style>
 </head>
-
 <body>
   <header>
     <h1>InfoCek.id</h1>
@@ -71,43 +53,24 @@
   </header>
 
   <nav>
-    <a href="#cek-resi">Cek Resi</a>
-    <a href="#jadwal-bola">Jadwal Bola</a>
-    <a href="#cuaca">Cuaca</a>
-    <a href="#harga">Harga</a>
-    <a href="#rekening">Cek Rekening</a>
+    <a href="#" class="tool"><i class="fas fa-box"></i><br>Cek Resi</a>
+    <a href="#" class="tool"><i class="fas fa-truck"></i><br>Cek Ongkir</a>
+    <a href="#" class="tool"><i class="fas fa-cloud-sun"></i><br>Cek Cuaca</a>
+    <a href="#" class="tool"><i class="fas fa-coins"></i><br>Harga Emas</a>
+    <a href="#" class="tool"><i class="fab fa-bitcoin"></i><br>Harga Bitcoin</a>
+    <a href="#" class="tool"><i class="fas fa-calendar-alt"></i><br>Jadwal Bola</a>
+    <a href="#" class="tool"><i class="fas fa-shield-alt"></i><br>Cek Rekening Penipu</a>
+    <a href="#" class="tool"><i class="fas fa-mobile-alt"></i><br>Bot WA Otomatis</a>
+    <a href="#" class="tool"><i class="fas fa-link"></i><br>Link Praktis</a>
   </nav>
 
-  <main>
-    <section id="cek-resi">
-      <h2>Cek Resi</h2>
-      <p>Masukkan nomor resi dari JNE, J&T, SiCepat, dll untuk melacak kirimanmu.</p>
-    </section>
-
-    <section id="jadwal-bola">
-      <h2>Jadwal Bola</h2>
-      <p>Lihat jadwal pertandingan bola terbaru dari berbagai liga dunia.</p>
-    </section>
-
-    <section id="cuaca">
-      <h2>Info Cuaca</h2>
-      <p>Cek prakiraan cuaca terkini untuk kotamu dan sekitarnya.</p>
-    </section>
-
-    <section id="harga">
-      <h2>Harga Emas, Bitcoin, Dollar</h2>
-      <p>Pantau harga terkini emas, bitcoin, dan nilai tukar dollar setiap saat.</p>
-    </section>
-
-    <section id="rekening">
-      <h2>Cek Legalitas Rekening</h2>
-      <p>Masukkan nomor rekening untuk mengetahui apakah terindikasi penipuan atau tidak.</p>
-    </section>
-  </main>
+  <div class="cta">
+    <p><strong>Gunakan InfoCek.id untuk kebutuhan harianmu – cepat, ringan, dan aman!</strong></p>
+    <button onclick="alert('Fitur segera aktif!')">Mulai Sekarang</button>
+  </div>
 
   <footer>
-    <p>&copy; 2025 InfoCek.id – Semua Hak Dilindungi</p>
+    &copy; 2025 InfoCek.id – Semua hak dilindungi. Dibuat untuk masyarakat Indonesia.
   </footer>
 </body>
-
 </html>
