@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>InfoCek.id - Cek Harga Ongkir</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #121212;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  .container {
+    background: #ff3d00;
+    border-radius: 15px;
+    padding: 30px 40px;
+    max-width: 450px;
+    width: 100%;
+    box-shadow: 0 0 20px #ff3d00cc;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    user-select: none;
+  }
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 700;
+    color: #fff;
+  }
+  select, input[type=number] {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+  }
+  button {
+    margin-top: 30px;
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    background: #fff;
+    color: #ff3d00;
+    font-weight: 700;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.3s ease;
+  }
+  button:hover {
+    background: #ff784e;
+    color: #fff;
+  }
+  .loading {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .result {
+    margin-top: 25px;
+    background: #fff;
+    color: #333;
+    border-radius: 10px;
+    padding: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+    font-size: 14px;
+  }
+  .service {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+  .service:last-child {
+    border-bottom: none;
+  }
+  .service-name {
+    font-weight: 700;
+  }
+  .service-cost {
+    margin-top: 5px;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Cek Harga Ongkir</h1>
+    <form id="ongkirForm">
+      <label for="origin">Kota Asal (ID)</label>
+      <select id="origin" name="origin" required>
+        <option value="">Pilih Kota Asal</option>
+        <option value="501">Jakarta</option>
+        <option value="114">Bandung</option>
+        <option value="39">Surabaya</option>
+        <option value="23">Medan</option>
+        <option value="74">Yogyakarta</option>
+        <option value="123">Semarang</option>
+        <option value="170">Denpasar</option>
+        <option value="187">Balikpapan</option>
+        <option value="58">Makassar</option>
+      </select>
+
+      <label for="destination">Kota Tujuan (ID)</label>
+      <select id="destination" name="destination" required>
+        <option value="">Pilih Kota Tujuan</option>
+        <option value="501">Jakarta</option>
+        <option value="114">Bandung</option>
+        <option value="39">Surabaya</option>
+        <option value="23">Medan</option>
+        <option value="74">Yogyakarta</option>
+        <option value="123">Semarang</option>
+        <option value="170">Denpasar</option>
+        <option value="187">Balikpapan</option>
+        <option value="58">Makassar</option>
+      </select>
+
+      <label for="weight">Berat Paket (gram)</label>
+      <input type="number" id="weight" name="weight" min="1" value="1000" required />
+
+      <label for="courier">Kurir</label>
+      <select id="courier" name="courier" required>
+        <option value="">Pilih Kurir</option>
+        <option value="jne">JNE</option>
+        <option value="pos">POS Indonesia</option>
+        <option value="tiki">TIKI</option>
+        <option value="sicepat">SiCepat</option>
+        <option value="jnt">J&T Express</option>
+        <option value="wahana">Wahana</option>
+        <option value="pandu">Pandu Logistics</option>
+        <option value="sap">SAP Express</option>
+        <option value="jet">JET Express</option>
+        <option value="lion">Lion Parcel</option>
+        <option value="ninja">Ninja Express</option>
+        <option value="rpx">RPX Holding</option>
+        <option value="idl">IDL Cargo</option>
+        <option value="rex">REX Indonesia</option>
+        <option value="first">First Logistics</option>
+      </select>
+
+      <button type="submit">Cek Harga Ongkir</button>
+    </form>
+    <div id="loading" class="loading" style="display:none;">Memuat data ongkir...</div>
+    <div id="result" class="result" style="display:none;"></div>
+  </div>
+
+  <script>
+    // Ganti 'YOUR_API_KEY' dengan API key Ongkir kamu
+    const API_KEY = 'fzNR9Qve921e93219a74c87aupJqU8D3';
+
+    const form = document.getElementById('ongkirForm');
+    const loading = document.getElementById('loading');
+    const resultDiv = document.getElementById('result');
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      loading.style.display = 'block';
+      resultDiv.style.display = 'none';
+      resultDiv.innerHTML = '';
+
+      const origin = form.origin.value;
+      const destination = form.destination.value;
+      const weight = form.weight.value;
+      const courier = form.courier.value;
+
+      if (!origin || !destination || !weight || !courier) {
+        alert('Lengkapi semua form!');
+        loading.style.display = 'none';
+        return;
+      }
+
+      try {
+        const response = await fetch('https://api.rajaongkir.com/starter/cost', {
+          method: 'POST',
+          headers: {
+            'key': API_KEY,
+            'content-type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams({
+            origin,
+            destination,
+            weight,
+            courier
+          }),
+        });
+
+        const data = await response.json();
+
+        if (data.rajaongkir.status.code !== 200) {
+          throw new Error(data.rajaongkir.status.description);
+        }
+
+        const costs = data.rajaongkir.results[0].costs;
+        if (costs.length === 0) {
+          resultDiv.innerHTML = '<p>Tidak ada layanan ongkir ditemukan.</p>';
+        } else {
+          let html = '';
+          costs.forEach(service => {
+            html += `
+              <div class="service">
+                <div class="service-name">${service.service} - ${service.description}</div>
+                <div class="service-cost">Harga: Rp${service.cost[0].value.toLocaleString('id-ID')} - Estimasi: ${service.cost[0].etd} hari</div>
+              </div>
+            `;
+          });
+          resultDiv.innerHTML = html;
+        }
+        resultDiv.style.display = 'block';
+      } catch (error) {
+        resultDiv.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
+        resultDiv.style.display = 'block';
+      } finally {
+        loading.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
