@@ -1,255 +1,219 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Cek Resi Paket - InfoCek.id</title>
-<meta name="description" content="Cek resi paket dengan mudah dan cepat. Tracking paket dari berbagai kurir populer di Indonesia." />
-<style>
-  /* Warna dan font */
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
-  body {
-    font-family: 'Poppins', sans-serif;
-    background: #000; /* hitam supaya warna neon lebih keluar */
-    color: #fff;
-    margin: 0; padding: 0;
-    display: flex; flex-direction: column; align-items: center; min-height: 100vh;
-  }
-
-  header {
-    background: linear-gradient(90deg, #FF3B3B, #FFD700, #FF8C00, #32CD32);
-    background-size: 400% 400%;
-    animation: gradientShift 10s ease infinite;
-    width: 100%;
-    padding: 25px 0;
-    text-align: center;
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: 1.2px;
-    text-shadow: 0 0 10px #FFD700;
-  }
-
-  @keyframes gradientShift {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-  }
-
-  main {
-    background: #111;
-    border-radius: 12px;
-    padding: 30px;
-    margin: 20px;
-    width: 95%;
-    max-width: 480px;
-    box-shadow: 0 0 20px #FF3B3B, 0 0 40px #FFD700;
-  }
-
-  label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-  }
-
-  select, input[type="text"] {
-    width: 100%;
-    padding: 12px 15px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    border: 2px solid #FFD700;
-    font-size: 1rem;
-    font-weight: 500;
-    outline: none;
-    background: #222;
-    color: #fff;
-    box-shadow: 0 0 8px #FFD700;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  select:focus, input[type="text"]:focus {
-    border-color: #32CD32;
-    box-shadow: 0 0 12px #32CD32;
-  }
-
-  button {
-    background: #FF3B3B;
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: 700;
-    padding: 15px;
-    width: 100%;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    box-shadow: 0 0 15px #FF3B3B;
-    position: relative;
-    animation: blink 1.5s infinite alternate;
-    transition: box-shadow 0.3s ease;
-  }
-
-  button:hover {
-    box-shadow: 0 0 25px #FFD700, 0 0 35px #FF8C00;
-  }
-
-  @keyframes blink {
-    0% {box-shadow: 0 0 15px #FF3B3B;}
-    100% {box-shadow: 0 0 35px #FFD700, 0 0 40px #FF8C00;}
-  }
-
-  /* Glow effect on input and button */
-  input[type="text"], select, button {
-    transition: box-shadow 0.3s ease;
-  }
-  input[type="text"]:focus, select:focus, button:hover {
-    box-shadow:
-      0 0 12px #FFD700,
-      0 0 25px #FF8C00,
-      0 0 35px #32CD32;
-  }
-
-  /* Loading slot reel style */
-  .loading {
-    margin-top: 15px;
-    font-size: 2rem;
-    color: #FFD700;
-    text-align: center;
-    letter-spacing: 8px;
-    animation: slotReel 1.2s linear infinite;
-    user-select: none;
-  }
-
-  @keyframes slotReel {
-    0% {opacity: 1; text-shadow: 0 0 10px #FFD700;}
-    50% {opacity: 0.4; text-shadow: none;}
-    100% {opacity: 1; text-shadow: 0 0 10px #FFD700;}
-  }
-
-  /* Result styling */
-  .result {
-    margin-top: 20px;
-    background: #222;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px #32CD32;
-    font-size: 1rem;
-    line-height: 1.5;
-  }
-
-  /* Responsive */
-  @media (max-width: 520px) {
-    main {
-      padding: 20px;
-      margin: 15px;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cek Resi & Ongkir - RajaOngkir</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; padding: 0 10px; }
+    h1 { text-align: center; }
+    .tabs { display: flex; justify-content: center; margin-bottom: 15px; }
+    .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      user-select: none;
     }
-  }
-
-  footer {
-    margin-top: auto;
-    padding: 15px;
-    text-align: center;
-    font-size: 0.9rem;
-    color: #999;
-  }
-</style>
+    .tab.active {
+      border-color: #007bff;
+      font-weight: bold;
+      color: #007bff;
+    }
+    form { margin-bottom: 20px; }
+    label { display: block; margin: 10px 0 5px; }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px;
+      width: 100%;
+      background-color: #007bff;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover { background-color: #0056b3; }
+    #loading { display: none; text-align: center; margin: 10px 0; }
+    #result { display: none; border: 1px solid #ddd; padding: 15px; background: #f9f9f9; }
+    .service { margin-bottom: 10px; }
+    .service-name { font-weight: bold; }
+    .service-cost { color: green; }
+  </style>
 </head>
 <body>
+  <h1>Cek Resi & Ongkir</h1>
 
-<header>
-  InfoCek.id - Cek Resi Paket Mudah & Cepat
-</header>
+  <div class="tabs">
+    <div id="tabResi" class="tab active">Cek Resi</div>
+    <div id="tabOngkir" class="tab">Cek Ongkir</div>
+  </div>
 
-<main>
-  <form id="cekResiForm">
-    <label for="courier">Pilih Kurir:</label>
-    <select id="courier" name="courier" required>
-      <option value="">-- Pilih Kurir --</option>
-      <option value="spx">SPX Standard</option>
-      <option value="jne">JNE</option>
-      <option value="pos">POS Indonesia</option>
-      <option value="tiki">TIKI</option>
-      <option value="sicepat">SiCepat</option>
-      <option value="jnt">J&T Express</option>
-      <option value="wahana">Wahana</option>
-      <option value="jet">JET Express</option>
-      <option value="pcp">PCP</option>
-      <option value="pandu">Pandu Logistics</option>
-      <option value="lion">Lion Parcel</option>
-    </select>
-
-    <label for="resi">Masukkan Nomor Resi:</label>
-    <input type="text" id="resi" name="resi" placeholder="Contoh: JNE1234567890" required />
-
-    <button type="submit" id="cekBtn">Cek Resi Sekarang!</button>
+  <!-- Form Cek Resi -->
+  <form id="resiForm">
+    <label for="courierResi">Kurir (contoh: jne, tiki, pos)</label>
+    <input type="text" id="courierResi" name="courierResi" placeholder="Masukkan nama kurir" required />
+    
+    <label for="trackingNumber">Nomor Resi</label>
+    <input type="text" id="trackingNumber" name="trackingNumber" placeholder="Masukkan nomor resi" required />
+    
+    <button type="submit">Cek Resi</button>
   </form>
 
-  <div id="loading" class="loading" style="display:none;">🎰🎰🎰</div>
-  <div id="result" class="result" style="display:none;"></div>
-</main>
+  <!-- Form Cek Ongkir -->
+  <form id="ongkirForm" style="display:none;">
+    <label for="origin">Kota Asal (ID kota contoh: 501)</label>
+    <input type="number" id="origin" name="origin" placeholder="Masukkan ID kota asal" required />
+    
+    <label for="destination">Kota Tujuan (ID kota contoh: 114)</label>
+    <input type="number" id="destination" name="destination" placeholder="Masukkan ID kota tujuan" required />
+    
+    <label for="weight">Berat (gram)</label>
+    <input type="number" id="weight" name="weight" placeholder="Masukkan berat paket" required />
+    
+    <label for="courierOngkir">Kurir</label>
+    <select id="courierOngkir" name="courierOngkir" required>
+      <option value="">Pilih Kurir</option>
+      <option value="jne">JNE</option>
+      <option value="tiki">TIKI</option>
+      <option value="pos">POS Indonesia</option>
+    </select>
+    
+    <button type="submit">Cek Ongkir</button>
+  </form>
 
-<footer>
-  © 2025 InfoCek.id - Semua hak dilindungi
-</footer>
+  <div id="loading">Loading...</div>
+  <div id="result"></div>
 
-<script>
-  const form = document.getElementById('cekResiForm');
-  const loading = document.getElementById('loading');
-  const result = document.getElementById('result');
-  const cekBtn = document.getElementById('cekBtn');
+  <script>
+    const API_KEY = 'PCRVugDy921e93219a74c87ae0Lhg5lB'; // Ganti dengan API Key RajaOngkir kamu
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const courier = form.courier.value.trim();
-    const resi = form.resi.value.trim();
+    const tabResi = document.getElementById('tabResi');
+    const tabOngkir = document.getElementById('tabOngkir');
+    const resiForm = document.getElementById('resiForm');
+    const ongkirForm = document.getElementById('ongkirForm');
+    const loading = document.getElementById('loading');
+    const result = document.getElementById('result');
 
-    if (!courier || !resi) {
-      alert('Silakan pilih kurir dan masukkan nomor resi!');
-      return;
+    // Fungsi pindah tab
+    tabResi.onclick = () => {
+      tabResi.classList.add('active');
+      tabOngkir.classList.remove('active');
+      resiForm.style.display = 'block';
+      ongkirForm.style.display = 'none';
+      result.style.display = 'none';
+    };
+    tabOngkir.onclick = () => {
+      tabOngkir.classList.add('active');
+      tabResi.classList.remove('active');
+      ongkirForm.style.display = 'block';
+      resiForm.style.display = 'none';
+      result.style.display = 'none';
+    };
+
+    // Form Cek Resi (Dummy data karena RajaOngkir starter gak support cek resi)
+    resiForm.onsubmit = async (e) => {
+      e.preventDefault();
+      const courier = resiForm.courierResi.value.trim();
+      const waybill = resiForm.trackingNumber.value.trim();
+      if (!courier || !waybill) {
+        alert('Kurir dan nomor resi harus diisi!');
+        return;
+      }
+      loading.style.display = 'block';
+      result.style.display = 'none';
+
+      // Simulasi delay dan hasil dummy
+      setTimeout(() => {
+        loading.style.display = 'none';
+        result.style.display = 'block';
+        result.innerHTML = `
+          <h3>Detail Resi (${courier.toUpperCase()})</h3>
+          <p><b>No. Resi:</b> ${waybill}</p>
+          <p>Status: <span style="color:green;">Sedang dalam pengiriman</span></p>
+          <p>Update terakhir: 19 Mei 2025 10:00 WIB</p>
+          <p>Lokasi: Jakarta</p>
+          <hr />
+          <p>Perjalanan paket:</p>
+          <ul>
+            <li>19 Mei 2025 08:00 - Paket diterima di gudang</li>
+            <li>19 Mei 2025 09:00 - Paket dalam perjalanan</li>
+            <li>19 Mei 2025 10:00 - Paket sampai di Jakarta</li>
+          </ul>
+          <small><i>Catatan: Ini data contoh, untuk cek resi real kamu perlu API lain.</i></small>
+        `;
+      }, 1000);
+    };
+
+    // Fungsi fetch untuk RajaOngkir ongkir
+    async function fetchRajaOngkir(endpoint, body) {
+      try {
+        const res = await fetch('https://api.rajaongkir.com/starter/' + endpoint, {
+          method: 'POST',
+          headers: {
+            'key': API_KEY,
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: new URLSearchParams(body)
+        });
+        if (!res.ok) throw new Error('Network response was not ok');
+        const data = await res.json();
+        return data;
+      } catch (err) {
+        throw err;
+      }
     }
 
-    loading.style.display = 'block';
-    result.style.display = 'none';
-    cekBtn.disabled = true;
+    // Form Cek Ongkir
+    ongkirForm.onsubmit = async (e) => {
+      e.preventDefault();
+      const origin = ongkirForm.origin.value.trim();
+      const destination = ongkirForm.destination.value.trim();
+      const weight = ongkirForm.weight.value.trim();
+      const courier = ongkirForm.courierOngkir.value;
+      if (!origin || !destination || !weight || !courier) {
+        alert('Semua kolom harus diisi!');
+        return;
+      }
+      loading.style.display = 'block';
+      result.style.display = 'none';
 
-    try {
-      // Ganti 'YOUR_API_KEY' dengan API key kamu dari binderbyte atau lainnya
-      const API_KEY = 'PCRVugDy921e93219a74c87ae0Lhg5lB';
-      const url = `https://api.binderbyte.com/v1/track?api_key=${API_KEY}&courier=${courier}&awb=${resi}`;
-
-      const response = await fetch(url);
-      const data = await response.json();
-
-      loading.style.display = 'none';
-      cekBtn.disabled = false;
-
-      if (data.status === 200 && data.data) {
-        const res = data.data;
-        let html = `<strong>Status:</strong> ${res.summary.status}<br>`;
-        html += `<strong>Kurir:</strong> ${res.summary.courier}<br>`;
-        html += `<strong>Nomor Resi:</strong> ${res.summary.waybill_number}<br>`;
-        html += `<strong>Pengirim:</strong> ${res.detail[0].manifest_description || '-'}<br>`;
-        html += `<strong>Tujuan:</strong> ${res.detail[res.detail.length -1].manifest_description || '-'}<br>`;
-        html += `<hr>`;
-        html += `<strong>Detail Pengiriman:</strong><br>`;
-        html += `<ul>`;
-        res.detail.forEach(step => {
-          html += `<li>${step.manifest_date} - ${step.manifest_time} - ${step.manifest_description}</li>`;
+      try {
+        const data = await fetchRajaOngkir('cost', {
+          origin,
+          destination,
+          weight,
+          courier
         });
-        html += `</ul>`;
+        loading.style.display = 'none';
+
+        if (data.rajaongkir.status.code !== 200) {
+          alert('Error: ' + data.rajaongkir.status.description);
+          return;
+        }
+
+        const costs = data.rajaongkir.results[0].costs;
+        let html = `<h3>Ongkir ${data.rajaongkir.results[0].name} (${courier.toUpperCase()})</h3>`;
+        costs.forEach(service => {
+          html += `
+            <div class="service">
+              <div class="service-name">${service.service}</div>
+              <div class="service-cost">Rp ${service.cost[0].value.toLocaleString()} - Estimasi ${service.cost[0].etd} hari</div>
+              <div class="service-desc">${service.description}</div>
+            </div>
+          `;
+        });
         result.innerHTML = html;
         result.style.display = 'block';
-      } else {
-        result.innerHTML = `<strong>Data tidak ditemukan atau resi salah.</strong>`;
-        result.style.display = 'block';
-      }
-    } catch (error) {
-      loading.style.display = 'none';
-      cekBtn.disabled = false;
-      result.innerHTML = `<strong>Terjadi kesalahan. Coba lagi nanti.</strong>`;
-      result.style.display = 'block';
-      console.error(error);
-    }
-  });
-</script>
 
+      } catch (err) {
+        loading.style.display = 'none';
+        alert('Gagal cek ongkir: ' + err.message);
+      }
+    };
+  </script>
 </body>
 </html>
