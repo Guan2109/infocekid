@@ -2,14 +2,12 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>InfoCek.id – Portal Cek Praktis</title>
-  <link rel="stylesheet" href="style.css" />
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       background: #f5f7fa;
       color: #333;
     }
@@ -39,9 +37,14 @@
       padding: 1.5rem;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       transition: transform 0.2s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s forwards;
+      animation-delay: var(--delay, 0s);
     }
     .fitur:hover {
       transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
     }
     .fitur h2 {
       margin-top: 0;
@@ -59,6 +62,9 @@
       text-decoration: none;
       border-radius: 6px;
       font-weight: bold;
+      display: inline-block;
+      transition: background 0.3s ease, transform 0.15s ease;
+      user-select: none;
     }
     .fitur a:hover {
       background: #0056b3;
@@ -69,35 +75,42 @@
       background: #e9ecef;
       font-size: 0.9rem;
     }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>InfoCek.id</h1>
-    <p>Portal Cek Praktis Sehari-hari untuk Pekerja</p>
+    <p>Portal Cek Praktis Sehari-hari</p>
   </header>
 
   <main>
     <section class="fitur-utama">
-      <div class="fitur">
+      <div class="fitur" style="--delay: 0s">
         <h2>Cek Cuaca</h2>
         <p>Klik untuk membuka info cuaca dari situs terpercaya.</p>
-        <a href="https://www.bmkg.go.id/cuaca/prakiraan-cuaca.bmkg" target="_blank">Lihat Cuaca</a>
+        <a href="https://www.bmkg.go.id/cuaca/prakiraan-cuaca.bmkg" target="_blank" rel="noopener noreferrer">Lihat Cuaca</a>
       </div>
 
-      <div class="fitur">
+      <div class="fitur" style="--delay: 0.2s">
         <h2>Cek Resi</h2>
         <p>Lacak paket kamu lewat berbagai ekspedisi.</p>
-        <a href="https://cekresi.com" target="_blank">Cek Resi Sekarang</a>
+        <a href="https://cekresi.com" target="_blank" rel="noopener noreferrer">Cek Resi Sekarang</a>
       </div>
 
-      <div class="fitur">
+      <div class="fitur" style="--delay: 0.4s">
         <h2>Harga Emas & Dollar</h2>
         <p>Lihat update harga emas dan nilai tukar terkini.</p>
-        <a href="https://www.logammulia.com" target="_blank">Cek Harga</a>
+        <a href="https://www.logammulia.com" target="_blank" rel="noopener noreferrer">Cek Harga</a>
       </div>
 
-      <div class="fitur">
+      <div class="fitur" style="--delay: 0.6s">
         <h2>Artikel Harian</h2>
         <p>Tips dan motivasi kerja untuk kamu setiap hari.</p>
         <a href="#">Baca Artikel</a>
@@ -106,7 +119,20 @@
   </main>
 
   <footer>
-    <p>&copy; 2025 InfoCek.id – Dibuat untuk para pekerja Indonesia.</p>
+    <p>&copy; 2025 InfoCek.id – Dibuat untuk Umum.</p>
   </footer>
+
+  <script>
+    // Animasi klik tombol sederhana
+    const buttons = document.querySelectorAll('.fitur a');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          btn.style.transform = '';
+        }, 150);
+      });
+    });
+  </script>
 </body>
 </html>
