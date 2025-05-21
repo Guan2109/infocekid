@@ -2,89 +2,211 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{{ page.title }} | InfoCek.id</title>
-  <link rel="stylesheet" href="/assets/css/style.css" />
+  <meta name="description" content="{{ page.description | default: site.description }}" />
+  <meta name="keywords" content="{{ page.tags | join: ', ' }}" />
+  <meta name="author" content="InfoCek.id" />
+  <link rel="canonical" href="{{ page.canonical_url | default: site.url }}" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{ page.title }}" />
+  <meta property="og:description" content="{{ page.description | default: site.description }}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="{{ page.canonical_url | default: site.url }}" />
+  <meta property="og:image" content="{{ page.image | default: site.url | append: '/cover.png' }}" />
+
   <style>
+    /* Reset & base */
     body {
-      background: #f5f7fa;
-      margin: 0; padding: 0;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.65;
+      color: #333;
+      background: #fefefe;
+      margin: 0;
+      padding: 0 1rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    article {
-      max-width: 800px;
-      margin: 3rem auto;
-      background: #fff;
-      padding: 2rem 2.5rem;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    a {
+      color: #007bff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #0056b3;
+      text-decoration: underline;
+    }
+    h1 {
+      color: #007bff;
+      margin-bottom: 0.3rem;
+      font-weight: 700;
+    }
+    .meta-info {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+    .meta-info span {
+      margin-right: 1rem;
+    }
+    .categories {
+      background: #e7f1ff;
+      color: #0056b3;
+      padding: 0.15rem 0.6rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-right: 0.5rem;
+      display: inline-block;
+    }
+    article img {
+      max-width: 100%;
       border-radius: 12px;
-      color: #222;
-      line-height: 1.7;
+      margin: 1rem 0;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    article figcaption {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 1.5rem;
+    }
+    article p {
+      font-size: 1.1rem;
+      margin-bottom: 1.2rem;
       opacity: 0;
       transform: translateY(20px);
-      animation: fadeInUp 0.8s forwards;
+      animation: fadeInUp 0.6s forwards;
     }
+    article p:nth-child(1) { animation-delay: 0.1s; }
+    article p:nth-child(2) { animation-delay: 0.3s; }
+    article p:nth-child(3) { animation-delay: 0.5s; }
+    article p:nth-child(4) { animation-delay: 0.7s; }
+    article p:nth-child(5) { animation-delay: 0.9s; }
+    /* ...tambah delay untuk paragraf lebih banyak */
+
     @keyframes fadeInUp {
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
-    article h1 {
-      font-weight: 700;
-      color: #007bff;
-      margin-bottom: 1rem;
-      font-size: 2.4rem;
-      text-align: center;
-      position: relative;
-      animation: highlightGlow 2.5s infinite alternate;
-    }
-    @keyframes highlightGlow {
-      from {
-        text-shadow: 0 0 5px #007bff;
-      }
-      to {
-        text-shadow: 0 0 15px #66b2ff;
-      }
-    }
-    article h2 {
-      color: #0056b3;
+    .share-buttons {
       margin-top: 2rem;
-      margin-bottom: 1rem;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+    .share-buttons button {
+      cursor: pointer;
+      border: none;
+      background: #007bff;
+      color: white;
+      padding: 0.5rem 1rem;
+      margin: 0 0.3rem;
+      border-radius: 6px;
       font-weight: 600;
-      border-left: 5px solid #007bff;
-      padding-left: 0.7rem;
-      transition: border-color 0.4s ease;
+      font-size: 1rem;
+      transition: background 0.3s ease;
     }
-    article h2:hover {
-      border-color: #0056b3;
+    .share-buttons button:hover {
+      background: #0056b3;
     }
-    article p {
-      font-size: 1.1rem;
-      margin-bottom: 1.25rem;
+
+    /* Sidebar for related/latest posts */
+    aside {
+      margin-top: 3rem;
+      padding: 1.5rem;
+      background: #f0f4ff;
+      border-radius: 12px;
     }
-    article ul {
-      margin-left: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    article ul li {
-      margin-bottom: 0.6rem;
-      font-size: 1.1rem;
-    }
-    article a {
-      color: #0056b3;
-      text-decoration: none;
-      border-bottom: 2px solid transparent;
-      transition: border-color 0.3s ease, color 0.3s ease;
-    }
-    article a:hover {
-      border-color: #007bff;
+    aside h3 {
       color: #007bff;
+      margin-bottom: 1rem;
+    }
+    aside ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+    aside ul li {
+      margin-bottom: 1rem;
+    }
+    aside ul li a {
+      color: #0056b3;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+    }
+    aside ul li a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
+
   <article>
-    {{ content }}
+    <h1>{{ page.title }}</h1>
+    <div class="meta-info">
+      <span>Tanggal: {{ page.date | date: "%d %B %Y" }}</span>
+      <span>
+        Kategori: 
+        {% for cat in page.categories %}
+          <span class="categories">{{ cat }}</span>
+        {% endfor %}
+      </span>
+    </div>
+
+    {% if page.image %}
+    <figure>
+      <img src="{{ page.image }}" alt="{{ page.title }}" />
+      {% if page.image_caption %}
+      <figcaption>{{ page.image_caption }}</figcaption>
+      {% endif %}
+    </figure>
+    {% endif %}
+
+    <section class="content">
+      {{ content }}
+    </section>
+
+    <div class="share-buttons">
+      <button onclick="shareWhatsApp()">WhatsApp</button>
+      <button onclick="shareTwitter()">Twitter</button>
+      <button onclick="shareFacebook()">Facebook</button>
+    </div>
+
+    <aside>
+      <h3>Artikel Terbaru</h3>
+      <ul>
+        {% for post in site.posts limit:5 %}
+          <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </aside>
+
   </article>
+
+  <script>
+    function shareWhatsApp() {
+      const url = encodeURIComponent(window.location.href);
+      const text = encodeURIComponent(document.title);
+      window.open(`https://api.whatsapp.com/send?text=${text}%20${url}`, '_blank');
+    }
+    function shareTwitter() {
+      const url = encodeURIComponent(window.location.href);
+      const text = encodeURIComponent(document.title);
+      window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+    }
+    function shareFacebook() {
+      const url = encodeURIComponent(window.location.href);
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+    }
+  </script>
+  
 </body>
 </html>
