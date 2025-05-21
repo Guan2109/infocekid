@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -139,7 +141,23 @@
         <p>Tips dan motivasi kerja untuk kamu setiap hari.</p>
         <a href="#">Baca Artikel</a>
       </div>
-    </section>
+    </section><section class="artikel-terbaru" style="padding: 2rem; max-width: 800px; margin: auto;">
+    <h2 style="color:#007bff; margin-bottom: 1rem;">Artikel Terbaru</h2>
+    <ul style="list-style: none; padding: 0;">
+      {% for post in site.posts %}
+      <li style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #ddd;">
+        <a href="{{ post.url }}" style="font-size: 1.2rem; color: #0056b3; text-decoration: none;">
+          {{ post.title }}
+        </a>
+        <br />
+        <small style="color: #666;">{{ post.date | date: "%d %B %Y" }}</small>
+        <p style="margin-top: 0.3rem; color: #333;">{{ post.excerpt | strip_html | truncatewords: 25 }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+</main>
   </main>
 
   <footer>
