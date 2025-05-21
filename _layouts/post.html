@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>{{ page.title }} | InfoCek.id</title>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <style>
+    body {
+      background: #f5f7fa;
+      margin: 0; padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+    article {
+      max-width: 800px;
+      margin: 3rem auto;
+      background: #fff;
+      padding: 2rem 2.5rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      color: #222;
+      line-height: 1.7;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s forwards;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    article h1 {
+      font-weight: 700;
+      color: #007bff;
+      margin-bottom: 1rem;
+      font-size: 2.4rem;
+      text-align: center;
+      position: relative;
+      animation: highlightGlow 2.5s infinite alternate;
+    }
+    @keyframes highlightGlow {
+      from {
+        text-shadow: 0 0 5px #007bff;
+      }
+      to {
+        text-shadow: 0 0 15px #66b2ff;
+      }
+    }
+    article h2 {
+      color: #0056b3;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      border-left: 5px solid #007bff;
+      padding-left: 0.7rem;
+      transition: border-color 0.4s ease;
+    }
+    article h2:hover {
+      border-color: #0056b3;
+    }
+    article p {
+      font-size: 1.1rem;
+      margin-bottom: 1.25rem;
+    }
+    article ul {
+      margin-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    article ul li {
+      margin-bottom: 0.6rem;
+      font-size: 1.1rem;
+    }
+    article a {
+      color: #0056b3;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s ease, color 0.3s ease;
+    }
+    article a:hover {
+      border-color: #007bff;
+      color: #007bff;
+    }
+  </style>
+</head>
+<body>
+  <article>
+    {{ content }}
+  </article>
+</body>
+</html>
